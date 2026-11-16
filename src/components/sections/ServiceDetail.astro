@@ -70,8 +70,8 @@ const tel = `tel:${site.phone.replace(/-/g, '')}`;
 <!-- Treatment -->
 <section class="bg-mist py-24 md:py-28">
   <div class="mx-auto grid max-w-7xl items-start gap-14 px-6 lg:grid-cols-12 lg:gap-20">
-    <Reveal client:visible className="lg:col-span-5">
-      <div class="group overflow-hidden rounded-[1.5rem] border border-ink/10 shadow-2xl shadow-ink/10 transition duration-700 hover:-translate-y-2 hover:border-taupe">
+    <Reveal client:visible className="lg:col-span-5 lg:self-stretch">
+      <div class="group overflow-hidden rounded-[1.5rem] border border-ink/10 shadow-2xl shadow-ink/10 transition duration-700 hover:border-taupe lg:sticky lg:top-40">
         <img src={c.treatImg} alt={c.treatImgAlt} loading="lazy" class="aspect-square w-full object-cover transition duration-700 group-hover:scale-105" />
       </div>
     </Reveal>
@@ -81,7 +81,7 @@ const tel = `tel:${site.phone.replace(/-/g, '')}`;
       <p class="mt-5 text-lg leading-relaxed text-taupe-dark">{c.treatText}</p>
       <ol class="mt-8 divide-y divide-ink/10 border-y border-ink/10">
         {c.treatments.map((t, i) => (
-          <li class="group flex gap-5 py-5">
+          <li class="group flex gap-5 py-8">
             <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold-deep/40 font-serif text-lg text-gold-deep transition-colors duration-300 group-hover:bg-ink group-hover:text-taupe-light">{i + 1}</span>
             <div>
               <h3 class="font-serif text-2xl transition-colors group-hover:text-gold-deep">{t.t}</h3>
