@@ -142,7 +142,7 @@ const telLocal = local ? `tel:${local.phone.replace(/-/g, '')}` : tel;
 
 <LocationCards
   title={local ? local.locationsTitle : `Get ${c.title} care near you`}
-  hrefBase={`/services/${c.slug}`}
+  hrefBase={c.slug === 'achilles-tendonitis' ? `/services/${c.slug}` : undefined}
   serviceTitle={local ? local.title : c.title}
   currentId={local?.id}
   text={local ? `Book Achilles Tendonitis care in ${local.city} or at one of our other two New Jersey offices.` : undefined}

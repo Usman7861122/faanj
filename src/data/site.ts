@@ -68,12 +68,14 @@ export const nav: NavItem[] = [
 ];
 
 export const services = [
-  { slug: 'achilles-tendonitis', title: 'Achilles Tendonitis', img: '/images/services/achilles-tendonitis.jpg', text: 'Relief for pain and stiffness along the back of the ankle, with a plan to get you moving again.' },
-  { slug: 'gout', title: 'Gout', img: '/images/services/gout.jpg', text: 'Fast treatment for sudden joint pain and swelling, plus steps to prevent future flare-ups.' },
-  { slug: 'hammer-toe', title: 'Hammer Toe', img: '/images/services/hammer-toe.jpg', text: 'Gentle and surgical options to correct toe deformity and ease daily discomfort.' },
-  { slug: 'ankle-injuries', title: 'Ankle Injuries', img: '/images/services/ankle-injuries.jpg', text: 'Care for sprains, fractures and instability so you can return to the things you love.' },
-  { slug: 'heel-pain', title: 'Heel Pain', img: '/images/services/heel-pain.jpg', text: 'Find the real cause of heel pain and treat it for lasting comfort.' },
-  { slug: 'heel-spur', title: 'Heel Spur', img: '/images/services/heel-spur.jpg', text: 'Targeted treatment to calm inflammation and remove the sharp pain with each step.' },
+  { slug: 'achilles-tendonitis', title: 'Achilles Tendonitis', img: '/images/services/achilles/exam.jpg', text: 'Relief for pain and stiffness along the back of the ankle, with a plan to get you moving again.' },
+  { slug: 'gout', title: 'Gout', img: '/images/services/gout/exam.jpg', text: 'Fast treatment for sudden joint pain and swelling, plus steps to prevent future flare-ups.' },
+  { slug: 'hammer-toe', title: 'Hammer Toe', img: '/images/services/hammer-toe/exam.jpg', text: 'Gentle and surgical options to correct toe deformity and ease daily discomfort.' },
+  { slug: 'ankle-injuries', title: 'Ankle Injuries', img: '/images/services/ankle-injuries/exam.jpg', text: 'Care for sprains, fractures and instability so you can return to the things you love.' },
+  { slug: 'heel-pain', title: 'Heel Pain', img: '/images/services/heel-pain/exam.jpg', text: 'Find the real cause of heel pain and treat it for lasting comfort.' },
+  { slug: 'heel-spur', title: 'Heel Spur', img: '/images/services/heel-spur/exam.jpg', text: 'Targeted treatment to calm inflammation and remove the sharp pain with each step.' },
+  { slug: 'ingrown-toenail', title: 'Ingrown Toenail', img: '/images/services/ingrown-toenail/exam.jpg', text: 'Quick, gentle in-office care for painful nails, with a lasting fix for repeat problems.' },
+  { slug: 'athletes-foot', title: 'Athlete’s Foot', img: '/images/services/athletes-foot/exam.jpg', text: 'Clear the itch and the infection, and learn simple steps to keep it from returning.' },
 ];
 
 export const providers = [

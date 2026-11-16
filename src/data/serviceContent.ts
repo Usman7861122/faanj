@@ -1,3 +1,5 @@
+import { moreServices } from './moreServices';
+
 export interface ServiceContent {
   slug: string;
   title: string;
@@ -24,7 +26,7 @@ export interface ServiceContent {
   tips: string[];
 }
 
-export const serviceContent: ServiceContent[] = [
+const base: ServiceContent[] = [
   {
     slug: 'achilles-tendonitis',
     title: 'Achilles Tendonitis',
@@ -82,3 +84,5 @@ export const serviceContent: ServiceContent[] = [
     ],
   },
 ];
+
+export const serviceContent: ServiceContent[] = [...base, ...moreServices];
