@@ -30,6 +30,16 @@ const tel = `tel:${site.phone.replace(/-/g, '')}`;
       </div>
     </Reveal>
   </div>
+  <Reveal client:visible>
+    <div class="mx-auto mt-16 max-w-7xl px-6">
+      <div class="border-t border-ink/15 pt-10">
+        <p class="flex items-start gap-4 text-lg leading-relaxed text-taupe-dark">
+          <svg viewBox="0 0 24 24" class="mt-1 h-6 w-6 shrink-0 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>{c.areas}</span>
+        </p>
+      </div>
+    </div>
+  </Reveal>
 </section>
 
 <!-- Symptoms + causes -->

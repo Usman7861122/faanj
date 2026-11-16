@@ -10,6 +10,7 @@ export interface ServiceContent {
   what: string[];
   whatImg: string;
   whatImgAlt: string;
+  areas: string;
   symptomsTitle: string;
   symptoms: { t: string; d: string }[];
   causesTitle: string;
@@ -41,6 +42,8 @@ export const serviceContent: ServiceContent[] = [
     ],
     whatImg: '/images/services/achilles/exam.jpg',
     whatImgAlt: 'Podiatrist examining a patient’s foot and ankle',
+    areas:
+      'Patients are welcome from across Scotch Plains, Jersey City, Union, Westfield, Plainfield, Elizabeth, Hoboken, Newark and the greater Union and Hudson County areas.',
     symptomsTitle: 'Common signs to watch for',
     symptoms: [
       { t: 'Pain at the back of the heel', d: 'A dull ache or burning feeling above the heel, often worse after activity.' },
