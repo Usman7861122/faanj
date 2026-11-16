@@ -9,7 +9,10 @@ const { p } = Astro.props;
 const me = providers.find((x) => x.slug === p.slug)!;
 const others = providers.filter((x) => x.slug !== p.slug);
 const tel = `tel:${site.phone.replace(/-/g, '')}`;
-const offices = p.offices.map((name) => locations.find((l) => l.name === name) ?? { name, address: '', phone: '' });
+const offices = p.offices.map((name) => {
+  const l = locations.find((x) => x.name === name);
+  return { name, address: l?.address ?? '', phone: l?.phone ?? '', href: `/locations/${l?.id ?? name.toLowerCase().replace(/\s+/g, '-')}` };
+});
 
 const ic: Record<string, string> = {
   cap: '<path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>',
@@ -112,12 +115,21 @@ const ic: Record<string, string> = {
     )}
     <Reveal client:visible delay={0.12}>
       <p class="eyebrow">Where to Find {p.short}</p>
-      <ul class:list={['mt-4', !p.personal && 'grid gap-x-12 sm:grid-cols-2 lg:grid-cols-3']}>
+      <ul class:list={['mt-6 grid gap-5', offices.length > 2 && !p.personal ? 'sm:grid-cols-2 lg:grid-cols-3' : 'sm:grid-cols-2']}>
         {offices.map((o) => (
-          <li class:list={['border-b border-ink/10 py-5', !p.personal ? 'border-t' : 'first:border-t']}>
-            <h3 class="font-serif text-2xl">{o.name}</h3>
-            {o.address && <p class="mt-1 text-taupe-dark">{o.address}</p>}
-            {o.phone && <a href={`tel:${o.phone.replace(/-/g, '')}`} class="mt-1 inline-block text-gold-deep transition-colors hover:text-ink">{o.phone}</a>}
+          <li>
+            <a href={o.href} class="group flex h-full flex-col rounded-2xl border border-ink/10 bg-white p-7 transition duration-500 hover:-translate-y-1.5 hover:border-taupe hover:shadow-2xl hover:shadow-ink/15">
+              <span class="flex h-11 w-11 items-center justify-center rounded-full border border-gold-deep/40 text-gold-deep transition-colors duration-300 group-hover:bg-ink group-hover:text-taupe-light">
+                <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <h3 class="mt-5 font-serif text-2xl transition-colors group-hover:text-gold-deep">{o.name}</h3>
+              {o.address && <p class="mt-2 text-[15px] leading-relaxed text-taupe-dark">{o.address}</p>}
+              {o.phone && <p class="mt-1 text-[15px] text-gold-deep">{o.phone}</p>}
+              <span class="mt-auto flex items-center gap-2 pt-5 text-[11px] font-medium uppercase tracking-[0.2em] text-ink">
+                View location
+                <span class="translate-x-0 transition duration-300 group-hover:translate-x-1.5" aria-hidden="true">→</span>
+              </span>
+            </a>
           </li>
         ))}
       </ul>
