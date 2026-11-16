@@ -1,0 +1,47 @@
+---
+import Reveal from '../islands/Reveal';
+import { locations } from '../../data/site';
+
+interface Props { eyebrow?: string; title?: string; text?: string }
+const {
+  eyebrow = 'Our Offices',
+  title = 'Visit us in Scotch Plains, Jersey City or Union',
+  text = 'Three convenient New Jersey offices. Choose the one closest to you and call to book.',
+} = Astro.props;
+---
+<section class="aurora py-24 md:py-28">
+  <div class="mx-auto max-w-7xl px-6">
+    <Reveal client:visible>
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">{eyebrow}</p>
+        <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">{title}</h2>
+        <p class="mt-5 text-lg text-taupe-dark">{text}</p>
+      </div>
+    </Reveal>
+    <div class="mt-14 grid gap-8 md:grid-cols-3">
+      {locations.map((l, i) => (
+        <Reveal client:visible delay={i * 0.12}>
+          <div class="group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-ink/10 bg-white transition duration-500 hover:-translate-y-2 hover:border-taupe hover:shadow-2xl hover:shadow-ink/15">
+            <div class="relative aspect-[4/3] w-full overflow-hidden bg-mist">
+              <iframe title={`Map of ${l.name} office`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="absolute inset-0 h-full w-full grayscale transition duration-500 group-hover:grayscale-0" src={`https://www.google.com/maps?q=${encodeURIComponent(l.address)}&output=embed`}></iframe>
+            </div>
+            <a href={`/locations/${l.id}`} class="flex flex-1 flex-col p-8">
+              <span class="flex items-center gap-3">
+                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold-deep/40 text-gold-deep transition-colors duration-300 group-hover:bg-ink group-hover:text-taupe-light">
+                  <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                <h3 class="font-serif text-3xl transition-colors group-hover:text-gold-deep">{l.name}</h3>
+              </span>
+              <p class="mt-5 text-[15px] leading-relaxed text-taupe-dark">{l.address}</p>
+              <p class="mt-1 text-[15px] text-gold-deep">{l.phone}</p>
+              <span class="mt-auto flex items-center gap-2 pt-6 text-[11px] font-medium uppercase tracking-[0.2em] text-ink">
+                View location
+                <span class="transition duration-300 group-hover:translate-x-1.5" aria-hidden="true">→</span>
+              </span>
+            </a>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>

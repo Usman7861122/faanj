@@ -1,16 +1,36 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageLayout from '../../layouts/PageLayout.astro';
+import ServiceDetail from '../../components/sections/ServiceDetail.astro';
 import { services } from '../../data/site';
+import { serviceContent } from '../../data/serviceContent';
 
 export function getStaticPaths() {
-  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+  return services.map((s) => ({
+    params: { slug: s.slug },
+    props: { service: s, content: serviceContent.find((c) => c.slug === s.slug) ?? null },
+  }));
 }
-const { service } = Astro.props;
+const { service, content } = Astro.props;
 ---
-
-<BaseLayout title={service.title} description={service.text}>
-  <section class="mx-auto max-w-6xl px-4 py-16">
-    <h1 class="text-3xl font-bold">{service.title}</h1>
-    <p class="mt-4 text-neutral-600">{service.text}</p>
-  </section>
-</BaseLayout>
+{content ? (
+  <PageLayout
+    title={content.title}
+    eyebrow="Our Services"
+    lede={content.lede}
+    description={content.description}
+    image={content.hero}
+    imageAlt={content.heroAlt}
+    position={content.heroPos}
+    crumbs={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: content.title }]}
+  >
+    <ServiceDetail c={content} />
+  </PageLayout>
+) : (
+  <BaseLayout title={service.title} description={service.text}>
+    <section class="mx-auto max-w-6xl px-4 py-16">
+      <h1 class="font-serif text-5xl">{service.title}</h1>
+      <p class="mt-4 text-lg">{service.text}</p>
+    </section>
+  </BaseLayout>
+)}
