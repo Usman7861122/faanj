@@ -39,30 +39,30 @@ const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] text-whi
           </a>
 
           {n.children && (
-            <div class:list={[panel, mega ? 'left-1/2 w-[min(80rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Our Practice' ? 'left-1/2 w-[40rem] -translate-x-1/2' : 'left-1/2 w-[26rem] -translate-x-1/2']}>
+            <div class:list={[panel, mega ? 'left-1/2 w-[min(56rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Our Practice' ? 'left-1/2 w-[40rem] -translate-x-1/2' : 'left-1/2 w-[26rem] -translate-x-1/2']}>
               <div class="rounded-2xl border border-white/10 bg-ink-deep/95 p-5 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 {mega && (
-                  <>
-                    <div class="mb-4 flex items-end justify-between gap-6 px-1">
+                  <div class="grid grid-cols-[15rem_1fr] gap-8 p-1">
+                    <div class="flex flex-col justify-between border-r border-white/10 pr-8">
                       <div>
                         <p class="text-[10px] uppercase tracking-[0.28em] text-taupe">Services We Offer</p>
-                        <p class="mt-1 font-serif text-2xl text-white">Conditions we treat</p>
+                        <p class="mt-3 font-serif text-3xl leading-tight text-white">Conditions we treat</p>
+                        <p class="mt-3 text-sm leading-relaxed text-white/65">Expert care for the foot and ankle, from everyday pain to complex surgery.</p>
                       </div>
-                      <a href="/services" class="text-xs uppercase tracking-[0.18em] text-taupe-light hover:text-white">View all services →</a>
+                      <a href="/services" class="btn btn-light mt-6 !min-h-11 !px-5 !text-[11px]">View all services</a>
                     </div>
-                    <div class="grid grid-cols-8 gap-3">
-                      {n.children.filter((c) => c.label !== 'View More Services').map((c) => (
-                        <a href={c.href} class="group/card relative block aspect-[3/4] overflow-hidden rounded-xl border border-white/10 transition-colors duration-300 hover:border-taupe">
-                          <img src={`/images/services/${c.href?.split('/').pop()}.jpg`} alt="" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover/card:scale-110" />
-                          <span class="absolute inset-0 bg-gradient-to-t from-ink-deep/90 via-ink-deep/20 to-transparent"></span>
-                          <span class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-1 p-3 text-[13px] leading-tight text-white">
-                            {c.label}
-                            <span class="translate-x-[-6px] text-taupe-light opacity-0 transition duration-300 group-hover/card:translate-x-0 group-hover/card:opacity-100">→</span>
-                          </span>
-                        </a>
+                    <ul class="grid grid-cols-2 gap-x-8">
+                      {n.children.filter((c) => c.label !== 'View More Services').map((c, k) => (
+                        <li>
+                          <a href={c.href} class="group/row flex items-center gap-4 border-b border-white/10 py-3.5 text-white/85 transition-colors hover:text-white">
+                            <span class="w-6 font-serif text-sm text-taupe/80 transition-colors group-hover/row:text-taupe">{String(k + 1).padStart(2, '0')}</span>
+                            <span class="flex-1 font-serif text-xl">{c.label}</span>
+                            <span class="-translate-x-2 text-taupe-light opacity-0 transition duration-300 group-hover/row:translate-x-0 group-hover/row:opacity-100">→</span>
+                          </a>
+                        </li>
                       ))}
-                    </div>
-                  </>
+                    </ul>
+                  </div>
                 )}
 
                 {n.label === 'Our Practice' && (
