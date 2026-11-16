@@ -1,0 +1,62 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Reveal from '../components/islands/Reveal';
+import GetInTouch from '../components/sections/GetInTouch.astro';
+import { blogPosts } from '../data/blogPosts';
+
+const posts = [...blogPosts].sort((a, b) => b.date.localeCompare(a.date));
+const fmt = (d: string) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+const [lead, ...rest] = posts;
+---
+<PageLayout
+  title="Blogs"
+  eyebrow="Foot & Ankle Health"
+  lede="Simple, practical advice from our foot and ankle specialists on pain, injuries, exercise and everyday foot care."
+  description="Foot and ankle health articles from Foot & Ankle Specialists of New Jersey: heel pain, exercise injuries, senior foot care and when to see a podiatrist."
+  image="/images/practice/hero.jpg"
+  imageAlt="Bright, modern reception area at a podiatry office in New Jersey"
+  position="center 60%"
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Blogs' }]}
+>
+  <section class="aurora py-24 md:py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Latest Articles</p>
+        <h2 class="mt-4 text-balance font-serif text-4xl leading-[1.1] md:text-5xl">Healthy feet start with good information</h2>
+      </div>
+
+      <Reveal client:visible className="mt-16">
+        <a href={`/${lead.slug}`} class="group grid overflow-hidden rounded-[1.5rem] border border-ink/10 bg-white transition duration-500 hover:-translate-y-2 hover:border-taupe hover:shadow-2xl hover:shadow-ink/15 lg:grid-cols-2">
+          <div class="overflow-hidden">
+            <img src={lead.img} alt={lead.title} class="aspect-[4/3] h-full w-full object-cover transition duration-700 group-hover:scale-105 lg:aspect-auto" />
+          </div>
+          <div class="flex flex-col justify-center p-8 md:p-12">
+            <p class="eyebrow">{fmt(lead.date)} · {lead.minutes} min read</p>
+            <h3 class="mt-4 text-balance font-serif text-3xl leading-tight transition-colors group-hover:text-gold-deep md:text-4xl">{lead.title}</h3>
+            <p class="mt-4 text-lg leading-relaxed text-taupe-dark">{lead.excerpt}</p>
+            <span class="mt-8"><span class="btn btn-dark group-hover:bg-ink group-hover:text-white">Read article</span></span>
+          </div>
+        </a>
+      </Reveal>
+
+      <div class="mt-10 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+        {rest.map((p, i) => (
+          <Reveal client:visible delay={(i % 3) * 0.1} className="h-full">
+            <a href={`/${p.slug}`} class="group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-ink/10 bg-white transition duration-500 hover:-translate-y-2 hover:border-taupe hover:shadow-2xl hover:shadow-ink/15">
+              <div class="overflow-hidden">
+                <img src={p.img} alt={p.title} loading="lazy" class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105" />
+              </div>
+              <div class="flex flex-1 flex-col p-7">
+                <p class="eyebrow">{fmt(p.date)} · {p.minutes} min read</p>
+                <h3 class="mt-3 text-balance font-serif text-2xl leading-snug transition-colors group-hover:text-gold-deep">{p.title}</h3>
+                <p class="mt-3 line-clamp-3 leading-relaxed text-taupe-dark">{p.excerpt}</p>
+                <span class="mt-auto pt-6"><span class="btn btn-dark group-hover:bg-ink group-hover:text-white">Read article</span></span>
+              </div>
+            </a>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+  <GetInTouch />
+</PageLayout>

@@ -1,0 +1,38 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Reveal from '../components/islands/Reveal';
+import ReviewsPager from '../components/islands/ReviewsPager';
+import GetInTouch from '../components/sections/GetInTouch.astro';
+import { reviews } from '../data/testimonials';
+import { site } from '../data/site';
+
+const tel = `tel:${site.phone.replace(/-/g, '')}`;
+---
+<PageLayout
+  title="Testimonials & Reviews"
+  eyebrow="Patient Stories"
+  lede="Real words from patients who came to us with foot and ankle pain and left feeling cared for."
+  description="Read patient testimonials and reviews for Foot & Ankle Specialists of New Jersey, with offices in Scotch Plains, Jersey City and Union."
+  image="/images/practice/hero.jpg"
+  imageAlt="Bright, modern reception area at a podiatry office in New Jersey"
+  position="center 60%"
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Testimonials' }]}
+>
+  <section class="aurora py-24 md:py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Testimonials</p>
+        <h2 class="mt-4 text-balance font-serif text-4xl leading-[1.1] md:text-5xl">Patients feel the difference</h2>
+        <p class="mt-5 text-lg text-taupe-dark">At Foot &amp; Ankle Specialists of New Jersey, we love hearing how our care helped. Here are some of the kind words our patients shared.</p>
+      </div>
+      <Reveal client:visible className="mt-16">
+        <ReviewsPager client:load items={reviews} perPage={6} />
+      </Reveal>
+      <div class="mt-16 flex flex-wrap items-center justify-center gap-4">
+        <a href={site.appointment} class="btn-appt"><span class="btn-fill"></span><span>Book Appointment</span></a>
+        <a href={tel} class="btn btn-dark">Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+  <GetInTouch />
+</PageLayout>

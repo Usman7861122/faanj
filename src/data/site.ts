@@ -7,6 +7,8 @@ export const site = {
   url: 'https://footandanklespecialistsofnj.com',
   phone: '908-232-3346',
   appointment: '/appointment',
+  // Paste a form service URL here (for example a Formspree endpoint) to send contact-form messages
+  formEndpoint: '',
 };
 
 const FORMS = '/forms';

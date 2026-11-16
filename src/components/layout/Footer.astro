@@ -49,7 +49,7 @@ const a = 'text-sm text-white/65 transition-colors hover:text-white';
   <div class="border-t border-white/10">
     <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-xs sm:flex-row">
       <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
-      <p class="flex gap-5"><a href="/privacy-policy" class="hover:text-white">Privacy Policy</a><a href="/terms-conditions" class="hover:text-white">Terms &amp; Conditions</a></p>
+      <p class="flex gap-5"><a href="/privacy-policy" class="hover:text-white">Privacy Policy</a><a href="/terms-conditions" class="hover:text-white">Terms &amp; Conditions</a><a href="/cookie-policy" class="hover:text-white">Cookie Policy</a><button type="button" class="hover:text-white" onclick="window.dispatchEvent(new Event('open-cookie-settings'))">Cookie Settings</button></p>
     </div>
   </div>
 </footer>

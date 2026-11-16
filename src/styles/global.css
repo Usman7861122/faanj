@@ -114,3 +114,11 @@
 .theme-logo .aurora::after { background: radial-gradient(circle, #efe9dd, transparent 65%); }
 .theme-logo #site-header.header-solid { background-color: rgb(26 26 26 / 0.96); }
 
+
+/* Blog article body */
+.article p { @apply mt-5 text-lg leading-[1.85] text-taupe-dark; }
+.article h2 { @apply mt-12 font-serif text-3xl leading-tight; }
+.article h3 { @apply mt-10 font-serif text-2xl leading-snug; }
+.article ul { @apply mt-5 list-disc space-y-2 pl-6 text-lg text-taupe-dark; }
+.article a { @apply text-gold-deep underline underline-offset-4; }
+.article strong { @apply font-medium text-ink; }
