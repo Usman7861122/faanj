@@ -1,0 +1,35 @@
+---
+import Reveal from '../islands/Reveal';
+import TestimonialSlider from '../islands/TestimonialSlider';
+import ParticleField from '../islands/ParticleField';
+// Real reviews from the practice's testimonials page
+const reviews = [
+  { text: 'Dr. Chi does an amazing job of taking care of my feet as I am a diabetic. He explains things in an easy to understand way. I walk out of my appointment feeling like I am walking on air.', name: 'Susan S.', doctor: 'Dr. Chi' },
+  { text: 'Best Drs around for foot and ankle issues. You are also seen within a few minutes. This group has no long wait times!!!', name: 'Shirley L.' },
+  { text: 'From the helpfulness of the front desk staff to Dr. Kozin, herself, it was clear that they were professional, extremely competent, and very caring. A full 5 stars from me!!', name: 'Jeffrey L.', doctor: 'Dr. Kozin' },
+  { text: 'He took time to listen to my concerns and answered all my questions clearly. I immediately felt comfortable and confident. I highly recommend Dr Mgbako!', name: 'Regina', doctor: 'Dr. Mgbako' },
+  { text: 'As a professional dancer, I was very appreciative of the time and attention Dr. Chi took to get to the root of the issue. Cannot recommend highly enough!', name: 'Nancy C.', doctor: 'Dr. Chi' },
+  { text: 'I had a fairly urgent need. The staff scheduled me in asap. Dr. Kozin is just the best and I recommend this practice to anyone and everyone.', name: 'Nicholas C.', doctor: 'Dr. Kozin' },
+];
+---
+<section class="aurora relative py-28">
+  <div class="absolute inset-0 -z-0 opacity-70"><ParticleField client:visible color="194,160,90" count={36} /></div>
+  <div class="relative mx-auto grid max-w-6xl items-center gap-16 px-6 lg:grid-cols-2">
+    <Reveal client:visible>
+      <div class="relative">
+        <div class="absolute -inset-4 -z-10 rounded-[2rem] border border-taupe/40 [animation:float_9s_ease-in-out_infinite]"></div>
+        <img src="/images/site/patient.jpg" onerror="this.onerror=null;this.src='/images/team/krupa-patel.webp'" alt="A happy patient after treatment" loading="lazy" class="img-sq shadow-2xl shadow-ink/10" />
+        <div class="absolute -bottom-5 -right-3 rounded-2xl bg-ink px-6 py-4 text-white shadow-xl sm:-right-6">
+          <p class="eyebrow !text-taupe-light">Patient Stories</p>
+          <p class="mt-1 font-serif text-xl">Real reviews, real relief</p>
+        </div>
+      </div>
+    </Reveal>
+    <Reveal client:visible delay={0.15}>
+      <p class="eyebrow">Testimonials</p>
+      <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl xl:text-6xl">Patients feel the difference</h2>
+      <div class="mt-8"><TestimonialSlider client:visible items={reviews} /></div>
+      <a href="/testimonials" class="btn btn-dark mt-10">Read All Reviews</a>
+    </Reveal>
+  </div>
+</section>

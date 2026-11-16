@@ -1,0 +1,35 @@
+---
+import { services } from '../../data/site';
+import Reveal from '../islands/Reveal';
+---
+<section class="bg-mist py-28">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow">Services We Offer</p>
+      <h2 class="mt-4 font-serif text-4xl md:text-5xl">Complete foot &amp; ankle treatment</h2>
+    </div>
+    <div class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+      {services.map((s, i) => (
+        <Reveal client:visible delay={(i % 3) * 0.1}>
+          <a href={`/services/${s.slug}`} class="group relative block aspect-square overflow-hidden rounded-[1.25rem] bg-ink">
+            <img src={s.img} alt={s.title} loading="lazy" class="h-full w-full object-cover transition duration-700 ease-[var(--ease-lux)] group-hover:scale-110 group-hover:opacity-40 group-focus-visible:opacity-40" />
+            <div class="absolute inset-0 bg-gradient-to-t from-ink/85 to-transparent"></div>
+            <div class="absolute inset-x-0 bottom-0 p-7 text-white">
+              <h3 class="font-serif text-3xl">{s.title}</h3>
+              <div class="grid grid-rows-[0fr] transition-all duration-500 group-hover:grid-rows-[1fr] group-focus-visible:grid-rows-[1fr]">
+                <div class="overflow-hidden">
+                  <p class="mt-3 text-sm text-white/80">{s.text}</p>
+                  <span class="mt-4 inline-block border-b border-taupe-light pb-1 text-xs uppercase tracking-[0.2em]">Read more</span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </Reveal>
+      ))}
+    </div>
+    <div class="mt-14 text-center">
+      <p class="text-taupe-dark">Looking for something else? We treat many more conditions.</p>
+      <a href="/services" class="btn btn-dark mt-6">View All Services</a>
+    </div>
+  </div>
+</section>

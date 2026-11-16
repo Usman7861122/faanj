@@ -1,0 +1,29 @@
+---
+import { providers } from '../../data/site';
+import Reveal from '../islands/Reveal';
+import ParticleField from '../islands/ParticleField';
+---
+<section class="relative overflow-hidden bg-ink py-28 text-white">
+  <ParticleField client:visible />
+  <div class="relative mx-auto max-w-6xl px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow !text-taupe-light">Our Team</p>
+      <h2 class="mt-4 font-serif text-4xl md:text-5xl">Meet Our Expert Providers</h2>
+    </div>
+    <div class="mt-16 grid gap-10 sm:grid-cols-2">
+      {providers.map((p, i) => (
+        <Reveal client:visible delay={(i % 2) * 0.12}>
+          <article class="group text-center">
+            <div class="overflow-hidden rounded-[1.5rem] border border-white/10 transition duration-700 group-hover:-translate-y-2 group-hover:border-taupe group-hover:shadow-2xl group-hover:shadow-black/40">
+              <img src={p.img} alt={`${p.name}, ${p.creds}`} loading="lazy" class="aspect-square w-full object-cover object-top transition duration-700 group-hover:scale-105" />
+            </div>
+            <h3 class="mt-6 font-serif text-3xl">{p.name}</h3>
+            <p class="mt-1 text-sm text-taupe-light">{p.creds}</p>
+            <p class="eyebrow mt-2 !text-white/60">{p.role}</p>
+            <a href={`/providers/#${p.slug}`} class="btn btn-light mt-6">View Profile</a>
+          </article>
+        </Reveal>
+      ))}
+    </div>
+  </div>
+</section>

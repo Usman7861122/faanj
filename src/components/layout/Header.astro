@@ -1,0 +1,122 @@
+---
+import { nav, site } from '../../data/site';
+import MobileMenu from '../islands/MobileMenu';
+interface Props { overlay?: boolean }
+const { overlay = false } = Astro.props;
+const tel = `tel:${site.phone.replace(/-/g, '')}`;
+const panel = 'invisible absolute top-full z-10 translate-y-3 pt-3 opacity-0 transition duration-300 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100';
+const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] text-white/80 transition-colors hover:text-white';
+---
+<header id="site-header" data-overlay={overlay ? 'true' : 'false'}
+  class:list={['inset-x-0 top-0 z-50 text-white transition-[background-color,box-shadow,backdrop-filter] duration-500', overlay ? 'fixed bg-transparent' : 'sticky bg-ink shadow-lg shadow-black/10']}>
+  <!-- Tier 1: brand + actions -->
+  <div class="border-b border-white/15">
+    <div class="mx-auto flex h-24 max-w-7xl items-center justify-between gap-6 px-6">
+      <a href="/" aria-label={`${site.name} home`} class="shrink-0">
+        <img src="/images/logo-transparent.png" alt={site.name} width="1000" height="234" class="h-[3.75rem] w-auto sm:h-[4.25rem]" />
+      </a>
+      <div class="hidden items-center gap-6 lg:flex">
+        <a href={tel} class="btn btn-light gap-3" aria-label={`Call ${site.phone}`}>
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+          <span>{site.phone}</span>
+        </a>
+        <a href={site.appointment} class="btn-appt"><span class="btn-fill"></span><span>Book Appointment</span></a>
+      </div>
+      <div class="lg:hidden"><MobileMenu client:media="(max-width: 1023px)" items={nav} phone={site.phone} appointment={site.appointment} /></div>
+    </div>
+  </div>
+
+  <!-- Tier 2: navigation -->
+  <nav class="hidden lg:block" aria-label="Main">
+    <ul class="relative mx-auto flex h-12 max-w-7xl items-center justify-center gap-10 px-6">
+      {nav.map((n) => {
+        const mega = n.label === 'Services';
+        return (
+        <li class:list={['group flex h-full items-center', !mega && 'relative']}>
+          <a href={n.href} class={`${link} flex items-center gap-1.5`} target={n.external ? '_blank' : undefined} rel={n.external ? 'noopener' : undefined}>
+            {n.label}
+            {n.children && <svg class="h-2.5 w-2.5 opacity-70 transition-transform duration-300 group-hover:rotate-180" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1 1l4 4 4-4" /></svg>}
+          </a>
+
+          {n.children && (
+            <div class:list={[panel, mega ? 'left-1/2 w-[min(80rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Our Practice' ? 'left-1/2 w-[40rem] -translate-x-1/2' : 'left-1/2 w-[26rem] -translate-x-1/2']}>
+              <div class="rounded-2xl border border-white/10 bg-ink-deep/95 p-5 shadow-2xl shadow-black/40 backdrop-blur-xl">
+                {mega && (
+                  <>
+                    <div class="mb-4 flex items-end justify-between gap-6 px-1">
+                      <div>
+                        <p class="text-[10px] uppercase tracking-[0.28em] text-taupe">Services We Offer</p>
+                        <p class="mt-1 font-serif text-2xl text-white">Conditions we treat</p>
+                      </div>
+                      <a href="/services" class="text-xs uppercase tracking-[0.18em] text-taupe-light hover:text-white">View all services →</a>
+                    </div>
+                    <div class="grid grid-cols-8 gap-3">
+                      {n.children.filter((c) => c.label !== 'View More Services').map((c) => (
+                        <a href={c.href} class="group/card relative block aspect-[3/4] overflow-hidden rounded-xl border border-white/10 transition-colors duration-300 hover:border-taupe">
+                          <img src={`/images/services/${c.href?.split('/').pop()}.jpg`} alt="" loading="lazy" class="h-full w-full object-cover transition duration-700 group-hover/card:scale-110" />
+                          <span class="absolute inset-0 bg-gradient-to-t from-ink-deep/90 via-ink-deep/20 to-transparent"></span>
+                          <span class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-1 p-3 text-[13px] leading-tight text-white">
+                            {c.label}
+                            <span class="translate-x-[-6px] text-taupe-light opacity-0 transition duration-300 group-hover/card:translate-x-0 group-hover/card:opacity-100">→</span>
+                          </span>
+                        </a>
+                      ))}
+                    </div>
+                  </>
+                )}
+
+                {n.label === 'Our Practice' && (
+                  <div class="flex gap-5">
+                    <a href="/our-practice" class="group/card relative block w-56 shrink-0 overflow-hidden rounded-xl border border-white/10 hover:border-taupe">
+                      <img src="/images/site/office.webp" alt="" loading="lazy" class="h-full min-h-48 w-full object-cover transition duration-700 group-hover/card:scale-105" />
+                      <span class="absolute inset-0 bg-gradient-to-t from-ink-deep/90 via-ink-deep/30 to-transparent"></span>
+                      <span class="absolute inset-x-0 bottom-0 p-4">
+                        <span class="text-[10px] uppercase tracking-[0.28em] text-taupe">About</span>
+                        <span class="mt-1 block font-serif text-2xl text-white">Our Practice</span>
+                        <span class="mt-1 block text-xs text-white/70">Meet the team →</span>
+                      </span>
+                    </a>
+                    <div class="flex-1">
+                      <p class="mb-2 px-1 text-[10px] uppercase tracking-[0.28em] text-taupe">Patient Forms</p>
+                      <ul class="space-y-1">
+                        {n.children.flatMap((c) => c.children ?? [c]).map((g) => (
+                          <li>
+                            <a href={g.href} target="_blank" rel="noopener" class="group/row flex items-center gap-3 rounded-lg px-3 py-2.5 text-[13px] text-white/80 transition-colors hover:bg-white/10 hover:text-white">
+                              <svg class="h-4 w-4 shrink-0 text-taupe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+                              <span class="flex-1">{g.label}</span>
+                              <span class="text-taupe-light opacity-0 transition group-hover/row:opacity-100">↗</span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+
+                {n.label === 'Testimonials' && n.children.map((c) => (
+                  <a href={c.href} class="group/card block rounded-xl border border-white/10 p-5 transition-colors hover:border-taupe hover:bg-white/5">
+                    <span class="flex gap-1 text-taupe">{[0,1,2,3,4].map(() => <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1.5l2.6 5.5 6 .8-4.4 4.2 1.1 6L10 15l-5.3 3 1.1-6L1.4 7.8l6-.8L10 1.5z"/></svg>)}</span>
+                    <span class="mt-3 block font-serif text-2xl text-white">{c.label}</span>
+                    <span class="mt-1 block text-xs text-white/70">See what our patients say about us →</span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          )}
+        </li>
+        );
+      })}
+    </ul>
+  </nav>
+</header>
+
+<script is:inline>
+  (function () {
+    var h = document.getElementById('site-header');
+    if (!h || h.dataset.overlay !== 'true') return;
+    var on = function () { h.classList.toggle('header-solid', window.scrollY > 40); };
+    on();
+    window.addEventListener('scroll', on, { passive: true });
+    document.addEventListener('astro:page-load', on);
+  })();
+</script>

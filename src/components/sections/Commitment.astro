@@ -1,0 +1,19 @@
+---
+import Reveal from '../islands/Reveal';
+import ParticleField from '../islands/ParticleField';
+import ParallaxImage from '../islands/ParallaxImage';
+---
+<section class="relative isolate overflow-hidden py-40 text-white">
+  <ParallaxImage client:load src="/images/site/climber.jpg" alt="Climber scaling a mountain wall" className="-z-20" />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink/70 via-ink/45 to-ink/75"></div>
+  <ParticleField client:visible />
+  <div class="relative mx-auto max-w-5xl px-6 text-center">
+    <Reveal client:visible>
+      <p class="eyebrow !text-taupe-light">Why Choose Us</p>
+      <h2 class="mt-5 font-serif text-4xl leading-tight md:text-6xl">Our Commitment to Excellence in <em>Foot and Ankle Care</em></h2>
+      <div class="mx-auto my-8 h-px w-24 bg-taupe-light"></div>
+      <p class="mx-auto max-w-2xl text-lg text-white/80">Accurate diagnosis, advanced treatment and genuine attention, from your first visit through full recovery.</p>
+      <a href="/our-practice" class="btn btn-light mt-10">Learn More</a>
+    </Reveal>
+  </div>
+</section>

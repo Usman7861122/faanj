@@ -1,0 +1,24 @@
+---
+import { posts } from '../../data/site';
+import Reveal from '../islands/Reveal';
+---
+<section class="aurora py-28">
+  <div class="mx-auto max-w-7xl px-6">
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="eyebrow">From Our Blog</p>
+      <h2 class="mt-4 font-serif text-4xl md:text-5xl">Foot health insights</h2>
+    </div>
+    <div class="mt-14 grid gap-8 md:grid-cols-3">
+      {posts.map((p, i) => (
+        <Reveal client:visible delay={i * 0.1} className="h-full">
+          <a href={p.href} class="group flex h-full flex-col">
+            <img src={p.img} alt="" loading="lazy" class="img-sq transition duration-700 group-hover:scale-[1.03]" />
+            <h3 class="mt-5 font-serif text-2xl leading-snug group-hover:underline underline-offset-4">{p.title}</h3>
+            <span class="mt-auto pt-5"><span class="btn btn-dark group-hover:-translate-y-0.5 group-hover:bg-ink group-hover:text-white group-hover:shadow-lg">Read article</span></span>
+          </a>
+        </Reveal>
+      ))}
+    </div>
+    <div class="mt-12 text-center"><a href="/blogs" class="btn btn-dark bg-ink text-white">All Articles</a></div>
+  </div>
+</section>

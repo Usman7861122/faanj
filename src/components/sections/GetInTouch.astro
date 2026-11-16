@@ -1,0 +1,15 @@
+---
+import LocationTabs from '../islands/LocationTabs';
+import { locations, site } from '../../data/site';
+---
+<section class="bg-mist py-28">
+  <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-12 lg:gap-20">
+    <div class="lg:col-span-5">
+      <p class="eyebrow">Get In Touch</p>
+      <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl xl:text-6xl">Visit one of our three New Jersey offices</h2>
+      <p class="mt-6 max-w-md text-lg text-taupe-dark">Choose a location, then call or book online. We will take great care of you.</p>
+      <a href={site.appointment} class="btn-appt mt-8"><span class="btn-fill"></span><span>Book Appointment</span></a>
+    </div>
+    <div class="lg:col-span-7"><LocationTabs client:visible locations={locations} /></div>
+  </div>
+</section>

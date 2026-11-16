@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { services } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+const { service } = Astro.props;
+---
+
+<BaseLayout title={service.title} description={service.text}>
+  <section class="mx-auto max-w-6xl px-4 py-16">
+    <h1 class="text-3xl font-bold">{service.title}</h1>
+    <p class="mt-4 text-neutral-600">{service.text}</p>
+  </section>
+</BaseLayout>

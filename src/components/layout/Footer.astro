@@ -1,0 +1,54 @@
+---
+import { nav, site, locations } from '../../data/site';
+const serviceLinks = nav.find((n) => n.label === 'Services')?.children?.filter((c) => c.label !== 'View More Services') ?? [];
+const h = 'text-[11px] font-medium uppercase tracking-[0.28em] text-taupe-light';
+const a = 'text-sm text-white/65 transition-colors hover:text-white';
+---
+<footer class="bg-ink-deep text-white/65">
+  <div class="mx-auto grid max-w-7xl gap-x-10 gap-y-12 px-6 py-16 sm:grid-cols-2 lg:grid-cols-12">
+    <!-- Brand -->
+    <div class="sm:col-span-2 lg:col-span-4">
+      <a href="/" aria-label={`${site.name} home`}><img src="/images/logo-transparent.png" alt={site.name} class="h-16 w-auto" loading="lazy" /></a>
+      <p class="mt-6 max-w-sm text-sm leading-relaxed">{site.description}</p>
+      <a href={site.appointment} class="btn-appt mt-8"><span class="btn-fill"></span><span>Book Appointment</span></a>
+    </div>
+
+    <!-- Explore -->
+    <div class="lg:col-span-2">
+      <h3 class={h}>Explore</h3>
+      <ul class="mt-5 space-y-3">
+        {nav.map((n) => <li><a class={a} href={n.href} target={n.external ? '_blank' : undefined} rel={n.external ? 'noopener' : undefined}>{n.label}</a></li>)}
+      </ul>
+    </div>
+
+    <!-- Services -->
+    <div class="lg:col-span-2">
+      <h3 class={h}>Services</h3>
+      <ul class="mt-5 space-y-3">
+        {serviceLinks.map((s) => <li><a class={a} href={s.href}>{s.label}</a></li>)}
+        <li><a class="text-sm text-taupe-light underline-offset-4 hover:underline" href="/services">View all →</a></li>
+      </ul>
+    </div>
+
+    <!-- Locations -->
+    <div class="sm:col-span-2 lg:col-span-4">
+      <h3 class={h}>Our Offices</h3>
+      <ul class="mt-5 space-y-6">
+        {locations.map((l) => (
+          <li class="border-l border-white/15 pl-4">
+            <p class="font-serif text-xl text-white">{l.name}</p>
+            <p class="mt-1 text-sm">{l.address}</p>
+            <a class="mt-1 inline-block text-sm text-taupe-light hover:text-white" href={`tel:${l.phone.replace(/-/g, '')}`}>{l.phone}</a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-6 py-6 text-xs sm:flex-row">
+      <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+      <p class="flex gap-5"><a href="/privacy-policy" class="hover:text-white">Privacy Policy</a><a href="/terms-conditions" class="hover:text-white">Terms &amp; Conditions</a></p>
+    </div>
+  </div>
+</footer>
