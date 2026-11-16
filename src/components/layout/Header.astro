@@ -39,7 +39,7 @@ const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] text-whi
           </a>
 
           {n.children && (
-            <div class:list={[panel, mega ? 'left-1/2 w-[min(56rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Our Practice' ? 'left-1/2 w-[min(44rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Patient Portal' ? 'left-1/2 w-[min(40rem,calc(100vw-3rem))] -translate-x-1/2' : 'left-1/2 w-[26rem] -translate-x-1/2']}>
+            <div class:list={[panel, mega ? 'left-1/2 w-[min(56rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Our Practice' ? 'left-1/2 w-[min(44rem,calc(100vw-3rem))] -translate-x-1/2' : 'left-1/2 w-[26rem] -translate-x-1/2']}>
               <div class="rounded-2xl border border-white/10 bg-ink-deep/95 p-5 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 {mega && (
                   <div class="grid grid-cols-[15rem_1fr] gap-8 p-1">
@@ -79,33 +79,6 @@ const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] text-whi
                       <p class="px-1 text-[10px] uppercase tracking-[0.28em] text-taupe">Patient Forms</p>
                       <ul class="mt-2">
                         {n.children.flatMap((c) => c.children ?? [c]).map((g, k) => (
-                          <li>
-                            <a href={g.href} target="_blank" rel="noopener" class="group/row flex items-center gap-4 border-b border-white/10 py-3.5 text-white/85 transition-colors hover:text-white">
-                              <span class="w-6 font-serif text-sm text-taupe/80 transition-colors group-hover/row:text-taupe">{String(k + 1).padStart(2, '0')}</span>
-                              <span class="flex-1 font-serif text-xl">{g.label}</span>
-                              <span class="-translate-x-2 text-taupe-light opacity-0 transition duration-300 group-hover/row:translate-x-0 group-hover/row:opacity-100">↗</span>
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-
-                {n.label === 'Patient Portal' && (
-                  <div class="grid grid-cols-[14rem_1fr] gap-8 p-1">
-                    <div class="flex flex-col justify-between border-r border-white/10 pr-8">
-                      <div>
-                        <p class="text-[10px] uppercase tracking-[0.28em] text-taupe">For Patients</p>
-                        <p class="mt-3 font-serif text-3xl leading-tight text-white">Patient Portal</p>
-                        <p class="mt-3 text-sm leading-relaxed text-white/65">See your records, message our team and manage your visits.</p>
-                      </div>
-                      <a href={n.href} target="_blank" rel="noopener" class="btn btn-light mt-6 !min-h-11 !px-5 !text-[11px]">Log in</a>
-                    </div>
-                    <div>
-                      <p class="px-1 text-[10px] uppercase tracking-[0.28em] text-taupe">Patient Forms</p>
-                      <ul class="mt-2">
-                        {n.children.filter((c) => c.label !== 'Log in to Patient Portal').map((g, k) => (
                           <li>
                             <a href={g.href} target="_blank" rel="noopener" class="group/row flex items-center gap-4 border-b border-white/10 py-3.5 text-white/85 transition-colors hover:text-white">
                               <span class="w-6 font-serif text-sm text-taupe/80 transition-colors group-hover/row:text-taupe">{String(k + 1).padStart(2, '0')}</span>
