@@ -2,7 +2,7 @@
 import { services } from '../../data/site';
 interface Props { exclude?: string }
 const { exclude } = Astro.props;
-const list = services.filter((s) => s.slug !== exclude);
+const list = services.filter((s) => s.slug !== exclude).slice(0, 6);
 import Reveal from '../islands/Reveal';
 ---
 <section class="bg-mist py-28">
