@@ -11,7 +11,7 @@ export default function ParallaxBand({ image, eyebrow, title, cta }: { image: st
       <div className="relative mx-auto max-w-4xl px-6 py-24 text-center text-white">
         {eyebrow && <p className="eyebrow !text-taupe-light">{eyebrow}</p>}
         <h2 className="mt-5 font-serif text-4xl leading-tight md:text-6xl">{title}</h2>
-        {cta && <a href={cta.href} className="btn-appt mt-10"><span className="btn-fill" /><span>{cta.label}</span></a>}
+        {cta && <a href={cta.href} className="btn-appt btn-ghost mt-10"><span className="btn-fill" /><span>{cta.label}</span></a>}
       </div>
     </section>
   );
