@@ -35,7 +35,17 @@ export const nav: NavItem[] = [
       },
     ],
   },
-  { label: 'Patient Portal', href: 'https://11307.portal.athenahealth.com/', external: true },
+  {
+    label: 'Patient Portal',
+    href: 'https://11307.portal.athenahealth.com/',
+    external: true,
+    children: [
+      { label: 'Log in to Patient Portal', href: 'https://11307.portal.athenahealth.com/', external: true },
+      { label: 'New Patient Forms', href: `${OLD}/Patient-Form.pdf`, external: true },
+      { label: 'Notice Of Privacy Practices', href: `${OLD}/Notice-Privacy-Practices.pdf`, external: true },
+      { label: 'Medicare', href: `${OLD}/Medicare.pdf`, external: true },
+    ],
+  },
   { label: 'Providers', href: '/providers' },
   {
     label: 'Services',
