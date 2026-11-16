@@ -20,7 +20,7 @@ const { title, eyebrow, lede, image, imageAlt = '', position = 'center', crumbs 
       </nav>
     )}
     {eyebrow && <p class="eyebrow !text-taupe-light">{eyebrow}</p>}
-    <h1 class="mt-4 max-w-3xl font-serif text-5xl leading-[1.05] md:text-7xl">{title}{titleAccent && <> <span class="text-taupe-light">{titleAccent}</span></>}</h1>
+    <h1 class="text-balance mt-4 max-w-3xl font-serif text-5xl leading-[1.05] md:text-7xl">{title}{titleAccent && <> <span class="text-taupe-light">{titleAccent}</span></>}</h1>
     {lede && <p class="mt-6 max-w-xl text-lg text-white/80 md:text-xl">{lede}</p>}
     {areas && (
       <div class="mt-12 border-t border-white/20 pt-8 md:mt-16">
