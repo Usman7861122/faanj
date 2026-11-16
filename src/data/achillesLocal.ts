@@ -46,15 +46,15 @@ export const achillesLocalPages: LocalPage[] = [
     areas:
       'Patients with Achilles Tendonitis are welcome from across Scotch Plains, Fanwood, Westfield, Plainfield, Cranford, Clark, Mountainside, Summit and the greater Union County area.',
     heroAlt: 'Achilles Tendonitis in Scotch Plains: runner holding a sore calf on a park path',
-    whatTitle: 'Achilles Tendonitis in Scotch Plains: what you should know',
+    whatTitle: 'Understanding Achilles Tendonitis in Scotch Plains',
     what: [
       'Achilles Tendonitis in Scotch Plains is a common problem for people who walk, jog and play sports around the parks and trails of Union County. The Achilles is the thick tendon that links your calf to your heel, and it works hard with every step.',
       'When the tendon gets irritated, you feel pain and stiffness at the back of the heel. Left alone, Achilles Tendonitis can slow you down for months, so it pays to have it checked early.',
       'At our Scotch Plains office, we look at your walking, your shoes and your training habits. Then we build a plan to treat your Achilles Tendonitis and help you get back to your routine.',
     ],
     whatImgAlt: 'Achilles Tendonitis in Scotch Plains: doctor explaining a foot and ankle model to a patient',
-    symptomsTitle: 'Signs of Achilles Tendonitis in Scotch Plains patients',
-    causesTitle: 'Why Achilles Tendonitis starts for many Scotch Plains runners and walkers',
+    symptomsTitle: 'Signs of Achilles Tendonitis to watch for',
+    causesTitle: 'What can cause Achilles Tendonitis?',
     treatTitle: 'How we treat Achilles Tendonitis in Scotch Plains',
     treatText:
       'Most patients with Achilles Tendonitis in Scotch Plains get better without surgery. We start with gentle, proven steps and only talk about surgery if you are not improving.',
@@ -111,8 +111,8 @@ export const achillesLocalPages: LocalPage[] = [
       'Our Journal Square office makes it easy to be seen. We find out why your Achilles Tendonitis started and give you a clear plan to feel better and keep moving around Jersey City.',
     ],
     whatImgAlt: 'Achilles Tendonitis in Jersey City: foot and ankle specialist talking with a patient',
-    symptomsTitle: 'How Achilles Tendonitis shows up for Jersey City patients',
-    causesTitle: 'What triggers Achilles Tendonitis in a busy Jersey City life',
+    symptomsTitle: 'How Achilles Tendonitis usually shows up',
+    causesTitle: 'What triggers Achilles Tendonitis?',
     treatTitle: 'Our approach to Achilles Tendonitis in Jersey City',
     treatText:
       'You should not have to stop your life to treat Achilles Tendonitis in Jersey City. Our care is built around simple, effective steps that fit your schedule.',
@@ -169,8 +169,8 @@ export const achillesLocalPages: LocalPage[] = [
       'Our Chestnut Street office is a friendly place to start. We explain your Achilles Tendonitis in simple words and walk you through every step of treatment in Union.',
     ],
     whatImgAlt: 'Achilles Tendonitis in Union: podiatrist reviewing a foot model with a senior patient',
-    symptomsTitle: 'Common signs of Achilles Tendonitis in Union',
-    causesTitle: 'Common causes of Achilles Tendonitis for Union residents',
+    symptomsTitle: 'Common signs of Achilles Tendonitis',
+    causesTitle: 'Common causes of Achilles Tendonitis',
     treatTitle: 'Treating Achilles Tendonitis in Union, step by step',
     treatText:
       'Our team treats Achilles Tendonitis in Union with a plan that fits your age, your activity and your goals. Most people recover with non-surgical care.',
