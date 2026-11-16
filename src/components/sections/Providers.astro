@@ -20,7 +20,7 @@ import ParticleField from '../islands/ParticleField';
             <h3 class="mt-6 font-serif text-3xl">{p.name}</h3>
             <p class="mt-1 text-sm text-taupe-light">{p.creds}</p>
             <p class="eyebrow mt-2 !text-white/60">{p.role}</p>
-            <a href={`/providers/#${p.slug}`} class="btn btn-light mt-6">View Profile</a>
+            <a href={(p as { href?: string }).href ?? `/providers/#${p.slug}`} class="btn btn-light mt-6">View Profile</a>
           </article>
         </Reveal>
       ))}

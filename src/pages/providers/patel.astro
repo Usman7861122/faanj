@@ -1,0 +1,148 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Reveal from '../../components/islands/Reveal';
+import GetInTouch from '../../components/sections/GetInTouch.astro';
+import { site, providers, locations } from '../../data/site';
+
+const tel = `tel:${site.phone.replace(/-/g, '')}`;
+const me = providers.find((p) => p.slug === 'patel')!;
+const others = providers.filter((p) => p.slug !== 'patel');
+const offices = locations.filter((l) => ['scotch-plains', 'union'].includes(l.id));
+
+const focus = [
+  'Podiatric surgery',
+  'Diabetic foot wounds',
+  'Bunions',
+  'Hammertoes',
+  'Wound care, infections and poor circulation',
+];
+const path = [
+  { t: 'New York University', d: 'Bachelor’s degree.' },
+  { t: 'New York College of Podiatric Medicine', d: 'Doctor of Podiatric Surgery and Medicine, graduating at the top of her class. Winner of several awards, including the ABMPS Diabetic Wound Care Award.' },
+  { t: 'Morristown Memorial Hospital', d: 'Residency, where she became chief resident and performed over 1,500 foot and ankle surgeries.' },
+  { t: 'Published research', d: 'Additional research on diabetic foot wounds and on surgical treatment for bunions.' },
+];
+---
+<PageLayout
+  title="Dr. Krupa Patel"
+  eyebrow={`${me.creds} · ${me.role}`}
+  lede="A podiatrist and surgeon who treats bunions, hammertoes and diabetic foot problems at our Scotch Plains and Union offices."
+  description="Meet Dr. Krupa Patel, DPM, FACFAS, podiatrist and foot and ankle surgeon at Foot & Ankle Specialists of New Jersey in Scotch Plains and Union, NJ."
+  image="/images/providers/surgery-hero.jpg"
+  imageAlt="Surgeons working together in a bright operating room"
+  position="center 45%"
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Providers', href: '/providers' }, { label: 'Dr. Krupa Patel' }]}
+>
+  <!-- About -->
+  <section class="aurora py-24 md:py-28">
+    <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-12 lg:gap-20">
+      <Reveal client:visible className="lg:col-span-5">
+        <div class="overflow-hidden rounded-[1.5rem] border border-ink/10 shadow-2xl shadow-ink/10">
+          <img src={me.img} alt={`${me.name}, ${me.creds}`} width="2250" height="1500" fetchpriority="high" class="aspect-[4/5] w-full object-cover object-[50%_20%]" />
+        </div>
+      </Reveal>
+      <Reveal client:visible delay={0.12} className="lg:col-span-7">
+        <p class="eyebrow">About Dr. Patel</p>
+        <h2 class="mt-4 font-serif text-4xl leading-[1.08] md:text-5xl xl:text-6xl">Skilled surgery. Caring, steady attention.</h2>
+        <div class="mt-8 max-w-2xl space-y-5 text-lg leading-relaxed text-taupe-dark">
+          <p>Dr. Krupa Patel is a talented podiatrist who practices at the Scotch Plains and Union, New Jersey offices of Foot &amp; Ankle Specialists of New Jersey.</p>
+          <p>She specializes in podiatric surgeries, diabetic foot wounds, and treatments for bunions, hammertoes, and diabetic issues including wound care, infections, and poor circulation.</p>
+          <p>Dr. Patel is dedicated to providing excellent care to all of her patients.</p>
+        </div>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a href={site.appointment} class="btn-appt"><span class="btn-fill"></span><span>Book with Dr. Patel</span></a>
+          <a href={tel} class="btn btn-dark">Call {site.phone}</a>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Focus areas -->
+  <section class="bg-mist py-24 md:py-28">
+    <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-24">
+      <Reveal client:visible>
+        <img src="/images/providers/wound-care.jpg" alt="Podiatrist wearing gloves dressing a patient’s toes" width="1400" height="1400" loading="lazy" class="img-sq aspect-square w-full object-cover shadow-2xl shadow-ink/10" />
+      </Reveal>
+      <Reveal client:visible delay={0.12}>
+        <p class="eyebrow">Areas of Focus</p>
+        <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">What Dr. Patel treats</h2>
+        <ul class="mt-10">
+          {focus.map((f, i) => (
+            <li class="group flex items-center gap-5 border-b border-ink/10 py-5 first:border-t">
+              <span class="w-8 font-serif text-lg text-gold-deep">{String(i + 1).padStart(2, '0')}</span>
+              <span class="font-serif text-2xl transition-colors group-hover:text-gold-deep">{f}</span>
+            </li>
+          ))}
+        </ul>
+        <a href="/services" class="btn btn-dark mt-9">View our services</a>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Education and training -->
+  <section class="relative overflow-hidden bg-ink py-24 text-white md:py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="max-w-2xl">
+        <p class="eyebrow !text-taupe-light">Education &amp; Training</p>
+        <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">An outstanding student, now an experienced surgeon</h2>
+      </div>
+      <ol class="mt-12 grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
+        {path.map((s, i) => (
+          <li class="group bg-ink p-8 transition-colors duration-300 hover:bg-ink-deep md:p-10">
+            <span class="font-serif text-lg text-taupe">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mt-4 font-serif text-2xl md:text-3xl">{s.t}</h3>
+            <p class="mt-3 leading-relaxed text-white/70">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Beyond the clinic + offices -->
+  <section class="aurora py-24 md:py-28">
+    <div class="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-2 lg:gap-24">
+      <Reveal client:visible>
+        <p class="eyebrow">Beyond the Clinic</p>
+        <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">A little about Dr. Patel</h2>
+        <p class="mt-6 max-w-xl text-lg leading-relaxed text-taupe-dark">When she is not practicing podiatry, Dr. Patel enjoys reading, going to the movies, and spending time with her husband and two sons.</p>
+      </Reveal>
+      <Reveal client:visible delay={0.12}>
+        <p class="eyebrow">Where to Find Her</p>
+        <ul class="mt-4">
+          {offices.map((o) => (
+            <li class="border-b border-ink/10 py-5 first:border-t">
+              <h3 class="font-serif text-2xl">{o.name}</h3>
+              <p class="mt-1 text-taupe-dark">{o.address}</p>
+              <a href={`tel:${o.phone.replace(/-/g, '')}`} class="mt-1 inline-block text-gold-deep transition-colors hover:text-ink">{o.phone}</a>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Other providers -->
+  <section class="bg-mist py-24">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Our Team</p>
+        <h2 class="mt-4 font-serif text-4xl md:text-5xl">Meet our other providers</h2>
+      </div>
+      <div class="mt-14 grid gap-8 sm:grid-cols-3">
+        {others.map((p, i) => (
+          <Reveal client:visible delay={i * 0.1}>
+            <a href={(p as { href?: string }).href ?? `/providers/#${p.slug}`} class="group block text-center">
+              <div class="overflow-hidden rounded-[1.5rem] border border-ink/10 transition duration-500 group-hover:-translate-y-2 group-hover:shadow-2xl group-hover:shadow-ink/15">
+                <img src={p.img} alt={`${p.name}, ${p.creds}`} loading="lazy" class="aspect-square w-full object-cover object-top transition duration-700 group-hover:scale-105" />
+              </div>
+              <h3 class="mt-5 font-serif text-2xl transition-colors group-hover:text-gold-deep">{p.name}</h3>
+              <p class="text-sm text-taupe-dark">{p.creds}</p>
+            </a>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <GetInTouch />
+</PageLayout>
