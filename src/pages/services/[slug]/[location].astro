@@ -3,28 +3,36 @@ import PageLayout from '../../../layouts/PageLayout.astro';
 import ServiceDetail from '../../../components/sections/ServiceDetail.astro';
 import { serviceContent } from '../../../data/serviceContent';
 import { achillesLocalPages } from '../../../data/achillesLocal';
+import { serviceLocalPages } from '../../../data/serviceLocal';
 
 export function getStaticPaths() {
-  const base = serviceContent.find((c) => c.slug === 'achilles-tendonitis')!;
-  return achillesLocalPages.map((l) => ({ params: { slug: base.slug, location: l.id }, props: { base, l } }));
+  const all = [
+    ...achillesLocalPages.map((l) => ({ ...l, slug: 'achilles-tendonitis' })),
+    ...serviceLocalPages,
+  ];
+  return all.map((l) => {
+    const base = serviceContent.find((c) => c.slug === l.slug)!;
+    return { params: { slug: l.slug, location: l.id }, props: { base, l } };
+  });
 }
 const { base, l } = Astro.props;
+const dir = base.slug === 'achilles-tendonitis' ? 'achilles' : base.slug;
 const c = {
   ...base,
   title: `${l.title} ${l.accent}`,
-  hero: '/images/services/achilles/local/hero.jpg',
+  hero: `/images/services/${dir}/local/hero.jpg`,
   heroAlt: l.heroAlt,
-  heroPos: '60% 55%',
+  heroPos: base.slug === 'achilles-tendonitis' ? '60% 55%' : (base.heroPos ?? '50% 50%'),
   whatTitle: l.whatTitle,
   what: l.what,
-  whatImg: '/images/services/achilles/local/consult.jpg',
+  whatImg: `/images/services/${dir}/local/consult.jpg`,
   whatImgAlt: l.whatImgAlt,
   symptomsTitle: l.symptomsTitle,
   causesTitle: l.causesTitle,
   treatTitle: l.treatTitle,
   treatText: l.treatText,
   treatments: l.treatments,
-  treatImg: '/images/services/achilles/local/band.jpg',
+  treatImg: `/images/services/${dir}/local/band.jpg`,
   treatImgAlt: l.treatImgAlt,
   tipsTitle: l.tipsTitle,
   tips: l.tips,
