@@ -1,0 +1,131 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import Reveal from '../components/islands/Reveal';
+import Providers from '../components/sections/Providers.astro';
+import GetInTouch from '../components/sections/GetInTouch.astro';
+import Insurance from '../components/sections/Insurance.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import { nav, site } from '../data/site';
+
+const tel = `tel:${site.phone.replace(/-/g, '')}`;
+const forms = (nav.find((n) => n.label === 'Our Practice')?.children ?? []).flatMap((c) => c.children ?? [c]);
+
+const pillars = [
+  { n: '01', t: 'We listen first', d: 'Your story guides the exam. We take time to understand your pain, your work and the things you love to do.' },
+  { n: '02', t: 'Clear answers', d: 'We explain what is wrong in simple words, show you your options, and never rush a decision.' },
+  { n: '03', t: 'Modern treatment', d: 'From gentle, non-surgical care to advanced surgery, you get the right treatment for your foot or ankle.' },
+  { n: '04', t: 'Care that follows through', d: 'We check your progress, adjust your plan and stay with you until you are moving comfortably again.' },
+];
+const steps = [
+  { t: 'Welcome and listen', d: 'We start with a friendly conversation about your symptoms and goals.' },
+  { t: 'Exam and diagnosis', d: 'A careful exam, and imaging when needed, finds the real cause of the problem.' },
+  { t: 'Your personal plan', d: 'We build a plan that fits your life, starting with the gentlest option that works.' },
+  { t: 'Recovery and support', d: 'Follow-up visits keep you on track, so the relief lasts.' },
+];
+---
+<PageLayout
+  title="Our Practice"
+  eyebrow="About Foot & Ankle Specialists of New Jersey"
+  lede="Board-certified podiatrists and surgeons, three convenient New Jersey offices, and one calm, personal approach to your care."
+  description="Meet Foot & Ankle Specialists of New Jersey: board-certified podiatrists and foot and ankle surgeons with offices in Scotch Plains, Jersey City and Union, NJ."
+  image="/images/practice/hero.jpg"
+  imageAlt="Bright, modern reception area at a podiatry office in New Jersey"
+  position="center 60%"
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Our Practice' }]}
+>
+  <!-- Overview -->
+  <section class="aurora py-24 md:py-28">
+    <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-24">
+      <Reveal client:visible>
+        <p class="eyebrow">Who We Are</p>
+        <h2 class="mt-4 font-serif text-4xl leading-[1.08] md:text-5xl xl:text-6xl">Thoughtful care for every step you take</h2>
+        <div class="mt-8 max-w-xl space-y-5 text-lg leading-relaxed text-taupe-dark">
+          <p>Foot &amp; Ankle Specialists of New Jersey brings together board-certified podiatrists and surgeons who listen first, then treat.</p>
+          <p>Whether you have a sore heel, a sports injury, or a condition that needs surgery, our team is here to help you move comfortably again. We pair modern techniques with a calm, personal approach.</p>
+        </div>
+        <div class="mt-9 flex flex-wrap items-center gap-4">
+          <a href={site.appointment} class="btn-appt"><span class="btn-fill"></span><span>Book Appointment</span></a>
+          <a href={tel} class="btn btn-dark">Call {site.phone}</a>
+        </div>
+      </Reveal>
+      <Reveal client:visible delay={0.15}>
+        <img src="/images/practice/consult.jpg" alt="Podiatrist talking with a patient about a foot exam" width="1200" height="1200" loading="lazy" class="img-sq aspect-square w-full object-cover shadow-2xl shadow-ink/10" />
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Why choose us -->
+  <section class="bg-mist py-24 md:py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Why Patients Choose Us</p>
+        <h2 class="mt-4 font-serif text-4xl md:text-5xl">A practice built around you</h2>
+      </div>
+      <div class="mt-14 grid overflow-hidden rounded-2xl border border-ink/10 bg-white sm:grid-cols-2 lg:grid-cols-4">
+        {pillars.map((p, i) => (
+          <Reveal client:visible delay={i * 0.08} className="h-full">
+            <div class:list={['group h-full p-8 transition-colors duration-300 hover:bg-ink hover:text-white', i > 0 && 'border-t border-ink/10 sm:border-t-0 sm:border-l lg:border-t-0', i === 2 && 'sm:border-t sm:border-l-0 lg:border-l lg:border-t-0']}>
+              <span class="font-serif text-lg text-gold-deep transition-colors group-hover:text-taupe">{p.n}</span>
+              <h3 class="mt-4 font-serif text-2xl">{p.t}</h3>
+              <p class="mt-3 text-[15px] leading-relaxed text-taupe-dark transition-colors group-hover:text-white/75">{p.d}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Our approach -->
+  <section class="relative overflow-hidden bg-ink py-24 text-white md:py-28">
+    <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-24">
+      <Reveal client:visible>
+        <img src="/images/practice/orthotics.jpg" alt="Podiatrist fitting a custom orthotic insole for a patient" width="1200" height="1200" loading="lazy" class="img-sq aspect-square w-full object-cover" />
+      </Reveal>
+      <Reveal client:visible delay={0.12}>
+        <p class="eyebrow !text-taupe-light">Our Approach</p>
+        <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">From your first visit to full recovery</h2>
+        <ol class="mt-10">
+          {steps.map((s, i) => (
+            <li class="flex gap-5 border-b border-white/10 py-5 first:border-t">
+              <span class="w-8 font-serif text-xl text-taupe">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3 class="font-serif text-2xl">{s.t}</h3>
+                <p class="mt-1 text-white/70">{s.d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Providers -->
+  <Providers />
+
+  <!-- Patient forms -->
+  <section class="aurora py-24">
+    <div class="mx-auto grid max-w-7xl items-center gap-10 px-6 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <p class="eyebrow">Patient Forms</p>
+        <h2 class="mt-4 font-serif text-4xl md:text-5xl">Save time before your visit</h2>
+        <p class="mt-5 max-w-md text-lg text-taupe-dark">Download and fill out your forms at home, then bring them to your appointment.</p>
+      </div>
+      <ul class="lg:col-span-7">
+        {forms.map((f, i) => (
+          <li>
+            <a href={f.href} target="_blank" rel="noopener" class="group flex items-center gap-5 border-b border-ink/10 py-5 transition-colors first:border-t hover:text-gold-deep">
+              <span class="w-8 font-serif text-lg text-gold-deep">{String(i + 1).padStart(2, '0')}</span>
+              <span class="flex-1 font-serif text-2xl">{f.label}</span>
+              <span class="translate-x-[-6px] opacity-0 transition duration-300 group-hover:translate-x-0 group-hover:opacity-100" aria-hidden="true">↗</span>
+              <span class="sr-only">(opens in a new tab)</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <Testimonials />
+  <Insurance />
+  <GetInTouch />
+</PageLayout>
