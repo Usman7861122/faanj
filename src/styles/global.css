@@ -120,10 +120,14 @@
 .theme-logo .btn-appt::before, .theme-logo .btn-appt::after { display: none; }
 /* Two button colours only: yellow (main) and white (everything else). No black buttons. */
 .theme-logo .btn, .theme-logo .btn-dark, .theme-logo .btn-light {
-  background: #fff; color: #282828; border: 1px solid rgb(0 0 0 / .1); border-radius: 5px; letter-spacing: 1px; font-size: 15px; font-weight: 600;
+  background: #fff; color: #282828; border: 1px solid rgb(0 0 0 / .22); border-radius: 5px; letter-spacing: 1px; font-size: 15px; font-weight: 600;
   box-shadow: 0 6px 16px -8px rgba(0,0,0,.25);
 }
-.theme-logo .btn:hover, .theme-logo .btn-dark:hover, .theme-logo .btn-light:hover { background: #ffcf40; color: #000; border-color: #ffcf40; }
+.theme-logo .btn:hover, .theme-logo .btn-dark:hover, .theme-logo .btn-light:hover,
+.theme-logo .group:hover .btn { background: #ffcf40 !important; color: #000 !important; border-color: #ffcf40; }
+/* Section calls to action alternate: some yellow, some white, so no page is all one colour */
+.theme-logo .btn.btn-yellow { background: #ffcf40 !important; color: #000 !important; border-color: #ffcf40; }
+.theme-logo .btn.btn-yellow:hover { background: #fff !important; border-color: rgb(0 0 0 / .22); }
 .theme-logo #site-header.header-solid { background-color: rgb(26 26 26 / 0.96); }
 
 
