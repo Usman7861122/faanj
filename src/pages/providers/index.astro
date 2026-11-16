@@ -1,0 +1,56 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import Reveal from '../../components/islands/Reveal';
+import GetInTouch from '../../components/sections/GetInTouch.astro';
+import Insurance from '../../components/sections/Insurance.astro';
+import { providers, site } from '../../data/site';
+import { profiles } from '../../data/providerProfiles';
+
+const tel = `tel:${site.phone.replace(/-/g, '')}`;
+const list = providers.map((p) => ({ ...p, profile: profiles.find((x) => x.slug === p.slug)! }));
+---
+<PageLayout
+  title="Our Providers"
+  eyebrow="Meet the Team"
+  lede="Foot and ankle surgeons and podiatrists who care for patients across our New Jersey offices."
+  description="Meet the podiatrists and foot and ankle surgeons of Foot & Ankle Specialists of New Jersey: Dr. Krupa Patel, Dr. Obinna Mgbako, Dr. Yu-Ching Terence Chi and Dr. Lara Kozin."
+  image="/images/practice/hero.jpg"
+  imageAlt="Bright, modern reception area at a podiatry office in New Jersey"
+  position="center 60%"
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Providers' }]}
+>
+  <section class="aurora py-24 md:py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <div class="mx-auto max-w-2xl text-center">
+        <p class="eyebrow">Our Providers</p>
+        <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">Experienced care, from first visit to recovery</h2>
+        <p class="mt-5 text-lg text-taupe-dark">Choose a provider to read about their training, what they treat, and where they see patients.</p>
+      </div>
+      <div class="mt-16 grid gap-10 md:grid-cols-2">
+        {list.map((p, i) => (
+          <Reveal client:visible delay={(i % 2) * 0.1} className="h-full">
+            <a href={p.href} class="group flex h-full flex-col overflow-hidden rounded-[1.5rem] border border-ink/10 bg-white transition duration-500 hover:-translate-y-2 hover:border-taupe hover:shadow-2xl hover:shadow-ink/15 sm:flex-row">
+              <div class="overflow-hidden sm:w-2/5 sm:shrink-0">
+                <img src={p.img} alt={`${p.name}, ${p.creds}`} loading={i < 2 ? 'eager' : 'lazy'} class="aspect-[4/5] h-full w-full object-cover object-top transition duration-700 group-hover:scale-105 sm:aspect-auto" />
+              </div>
+              <div class="flex flex-1 flex-col p-7 md:p-8">
+                <p class="eyebrow">{p.creds}</p>
+                <h3 class="mt-3 font-serif text-3xl leading-tight transition-colors group-hover:text-gold-deep">{p.name}</h3>
+                <p class="mt-1 text-sm text-taupe-dark">{p.role}</p>
+                <p class="mt-4 leading-relaxed text-taupe-dark">{p.profile.summary}</p>
+                <p class="mt-4 text-sm text-taupe-dark"><span class="text-gold-deep">Offices:</span> {p.profile.offices.join(', ')}</p>
+                <span class="mt-auto pt-6"><span class="btn btn-dark group-hover:-translate-y-0.5 group-hover:bg-ink group-hover:text-white group-hover:shadow-lg">View profile</span></span>
+              </div>
+            </a>
+          </Reveal>
+        ))}
+      </div>
+      <div class="mt-14 flex flex-wrap items-center justify-center gap-4">
+        <a href={site.appointment} class="btn-appt"><span class="btn-fill"></span><span>Book Appointment</span></a>
+        <a href={tel} class="btn btn-dark">Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+  <Insurance />
+  <GetInTouch />
+</PageLayout>

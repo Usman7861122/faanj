@@ -42,9 +42,9 @@ export const nav: NavItem[] = [
     href: '/providers',
     children: [
       { label: 'Krupa Patel', href: '/providers/patel' },
-      { label: 'Dr. Obinna O. Mgbako', href: '/providers/#mgbako' },
-      { label: 'Dr. Yu-Ching Terence Chi', href: '/providers/#yu-ching' },
-      { label: 'Lara Kozin', href: '/providers/#kozin' },
+      { label: 'Dr. Obinna O. Mgbako', href: '/providers/mgbako' },
+      { label: 'Dr. Yu-Ching Terence Chi', href: '/providers/yu-ching' },
+      { label: 'Lara Kozin', href: '/providers/kozin' },
     ],
   },
   {
@@ -78,9 +78,9 @@ export const services = [
 
 export const providers = [
   { slug: 'patel', name: 'Krupa Patel', creds: 'DPM, FACFAS', role: 'Foot & Ankle Surgery & Podiatry', img: '/images/team/krupa-patel.webp', href: '/providers/patel' },
-  { slug: 'mgbako', name: 'Dr. Obinna O. Mgbako', creds: 'DPM, FACFAS, FAPWCA', role: 'Foot & Ankle Surgery & Podiatry', img: '/images/team/obinna-mgbako.webp' },
-  { slug: 'yu-ching', name: 'Dr. Yu-Ching Terence Chi', creds: 'DPM, FACFAS', role: 'Foot & Ankle Surgery & Podiatry', img: '/images/team/yu-ching-chi.webp' },
-  { slug: 'kozin', name: 'Lara Kozin', creds: 'DPM, FACFAS', role: 'Foot & Ankle Surgeon & Podiatrist', img: '/images/team/lara-kozin.webp' },
+  { slug: 'mgbako', name: 'Dr. Obinna O. Mgbako', creds: 'DPM, FACFAS, FAPWCA', role: 'Foot & Ankle Surgery & Podiatry', img: '/images/team/obinna-mgbako.webp', href: '/providers/mgbako' },
+  { slug: 'yu-ching', name: 'Dr. Yu-Ching Terence Chi', creds: 'DPM, FACFAS', role: 'Foot & Ankle Surgery & Podiatry', img: '/images/team/yu-ching-chi.webp', href: '/providers/yu-ching' },
+  { slug: 'kozin', name: 'Lara Kozin', creds: 'DPM, FACFAS', role: 'Foot & Ankle Surgeon & Podiatrist', img: '/images/team/lara-kozin.webp', href: '/providers/kozin' },
 ];
 
 export const locations = [
