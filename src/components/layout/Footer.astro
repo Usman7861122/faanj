@@ -18,6 +18,7 @@ const a = 'text-sm text-white/65 transition-colors hover:text-white';
       <h3 class={h}>Explore</h3>
       <ul class="mt-5 space-y-3">
         {nav.map((n) => <li><a class={a} href={n.href} target={n.external ? '_blank' : undefined} rel={n.external ? 'noopener' : undefined}>{n.label}</a></li>)}
+        <li><a class={a} href="/home-2">Home 2</a></li>
       </ul>
     </div>
 

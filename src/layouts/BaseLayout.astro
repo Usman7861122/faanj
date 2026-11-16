@@ -8,14 +8,15 @@ interface Props {
   title?: string;
   description?: string;
   overlay?: boolean;
+  theme?: 'logo';
 }
-const { title, description = site.description, overlay = false } = Astro.props;
+const { title, description = site.description, overlay = false, theme } = Astro.props;
 const pageTitle = title ? `${title} | ${site.short}` : site.name;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class={theme === 'logo' ? 'theme-logo' : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/sections/Hero.astro';
+import About from '../components/sections/About.astro';
+import ServicesGrid from '../components/sections/ServicesGrid.astro';
+import ParallaxBand from '../components/islands/ParallaxBand';
+import Providers from '../components/sections/Providers.astro';
+import Commitment from '../components/sections/Commitment.astro';
+import Insurance from '../components/sections/Insurance.astro';
+import Testimonials from '../components/sections/Testimonials.astro';
+import Blog from '../components/sections/Blog.astro';
+import GetInTouch from '../components/sections/GetInTouch.astro';
+---
+<BaseLayout title="Podiatrist in Scotch Plains, Jersey City & Union, NJ" overlay theme="logo">
+  <Hero />
+  <About />
+  <ServicesGrid />
+  <ParallaxBand client:visible image="/images/site/jersey-city.jpg" eyebrow="Personal Podiatry"
+    title="Expert Podiatric Care with a Personal Touch—Restoring Your Mobility and Comfort" cta={{ label: 'Book Appointment', href: '/appointment' }} />
+  <Providers />
+  <Insurance />
+  <Commitment />
+  <Testimonials />
+  <Blog />
+  <GetInTouch />
+</BaseLayout>

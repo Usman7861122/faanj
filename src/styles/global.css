@@ -94,3 +94,22 @@
   backdrop-filter: blur(12px);
   box-shadow: 0 10px 30px -12px rgb(0 0 0 / 0.35);
 }
+
+/* Particle colours (r,g,b) used by ParticleField */
+:root { --particle-1: 230,211,163; --particle-2: 194,160,90; }
+
+/* Logo theme: charcoal + warm grey taken from the logo (used by /home-2) */
+.theme-logo {
+  --color-ink: #282828;
+  --color-ink-deep: #1a1a1a;
+  --color-taupe: #9a9a8a;
+  --color-taupe-light: #cfcfc3;
+  --color-taupe-dark: #55554e;
+  --color-gold-deep: #6f6f62;
+  --color-mist: #f4f4f1;
+  --particle-1: 207,207,195;
+  --particle-2: 154,154,138;
+}
+.theme-logo .aurora::before { background: radial-gradient(circle, #e4e4dc, transparent 65%); }
+.theme-logo .aurora::after { background: radial-gradient(circle, #efe9dd, transparent 65%); }
+.theme-logo #site-header.header-solid { background-color: rgb(26 26 26 / 0.96); }
