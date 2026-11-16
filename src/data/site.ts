@@ -9,7 +9,7 @@ export const site = {
   appointment: '/appointment',
 };
 
-const OLD = 'https://footandanklespecialistsofnj.com/wp-content/uploads/2025/04';
+const FORMS = '/forms';
 
 export type NavItem = {
   label: string;
@@ -28,16 +28,25 @@ export const nav: NavItem[] = [
       {
         label: 'Forms',
         children: [
-          { label: 'New Patient Forms', href: `${OLD}/Patient-Form.pdf`, external: true },
-          { label: 'Notice Of Privacy Practices', href: `${OLD}/Notice-Privacy-Practices.pdf`, external: true },
-          { label: 'Medicare', href: `${OLD}/Medicare.pdf`, external: true },
+          { label: 'New Patient Forms', href: `${FORMS}/Patient-Form.pdf`, external: true },
+          { label: 'Notice Of Privacy Practices', href: `${FORMS}/Notice-Privacy-Practices.pdf`, external: true },
+          { label: 'Medicare', href: `${FORMS}/Medicare.pdf`, external: true },
         ],
       },
     ],
   },
   { label: 'Patient Portal', href: 'https://11307.portal.athenahealth.com/', external: true },
 
-  { label: 'Providers', href: '/providers' },
+  {
+    label: 'Providers',
+    href: '/providers',
+    children: [
+      { label: 'Krupa Patel', href: '/providers/#patel' },
+      { label: 'Dr. Obinna O. Mgbako', href: '/providers/#mgbako' },
+      { label: 'Dr. Yu-Ching Terence Chi', href: '/providers/#yu-ching' },
+      { label: 'Lara Kozin', href: '/providers/#kozin' },
+    ],
+  },
   {
     label: 'Services',
     href: '/services',
