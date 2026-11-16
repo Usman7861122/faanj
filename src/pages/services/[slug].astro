@@ -22,6 +22,7 @@ const { service, content } = Astro.props;
     image={content.hero}
     imageAlt={content.heroAlt}
     position={content.heroPos}
+    areas={content.areas}
     crumbs={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: content.title }]}
   >
     <ServiceDetail c={content} />
