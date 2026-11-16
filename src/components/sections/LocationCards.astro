@@ -2,11 +2,14 @@
 import Reveal from '../islands/Reveal';
 import { locations } from '../../data/site';
 
-interface Props { eyebrow?: string; title?: string; text?: string }
+interface Props { eyebrow?: string; title?: string; text?: string; hrefBase?: string; serviceTitle?: string; currentId?: string }
 const {
   eyebrow = 'Our Offices',
   title = 'Visit us in Scotch Plains, Jersey City or Union',
   text = 'Three convenient New Jersey offices. Choose the one closest to you and call to book.',
+  hrefBase,
+  serviceTitle,
+  currentId,
 } = Astro.props;
 ---
 <section class="aurora py-24 md:py-28">
@@ -25,17 +28,18 @@ const {
             <div class="relative aspect-[4/3] w-full overflow-hidden bg-mist">
               <iframe title={`Map of ${l.name} office`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="absolute inset-0 h-full w-full grayscale transition duration-500 group-hover:grayscale-0" src={`https://www.google.com/maps?q=${encodeURIComponent(l.address)}&output=embed`}></iframe>
             </div>
-            <a href={`/locations/${l.id}`} class="flex flex-1 flex-col p-8">
+            <a href={hrefBase ? `${hrefBase}/${l.id}` : `/locations/${l.id}`} class="flex flex-1 flex-col p-8">
               <span class="flex items-center gap-3">
                 <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold-deep/40 text-gold-deep transition-colors duration-300 group-hover:bg-ink group-hover:text-taupe-light">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                 </span>
                 <h3 class="font-serif text-3xl transition-colors group-hover:text-gold-deep">{l.name}</h3>
               </span>
+              {currentId === l.id && <span class="mt-3 inline-block self-start rounded-full border border-gold-deep/40 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-gold-deep">You are viewing this office</span>}
               <p class="mt-5 text-[15px] leading-relaxed text-taupe-dark">{l.address}</p>
               <p class="mt-1 text-[15px] text-gold-deep">{l.phone}</p>
               <span class="mt-auto flex items-center gap-2 pt-6 text-[11px] font-medium uppercase tracking-[0.2em] text-ink">
-                View location
+                {serviceTitle ? `${serviceTitle} in ${l.name}` : 'View location'}
                 <span class="transition duration-300 group-hover:translate-x-1.5" aria-hidden="true">→</span>
               </span>
             </a>

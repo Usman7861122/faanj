@@ -1,6 +1,6 @@
 ---
-interface Props { title: string; eyebrow?: string; lede?: string; image: string; imageAlt?: string; position?: string; crumbs?: { label: string; href?: string }[]; areas?: string }
-const { title, eyebrow, lede, image, imageAlt = '', position = 'center', crumbs = [], areas } = Astro.props;
+interface Props { title: string; eyebrow?: string; lede?: string; image: string; imageAlt?: string; position?: string; crumbs?: { label: string; href?: string }[]; areas?: string; titleAccent?: string }
+const { title, eyebrow, lede, image, imageAlt = '', position = 'center', crumbs = [], areas, titleAccent } = Astro.props;
 ---
 <section class="relative isolate overflow-hidden bg-ink-deep text-white">
   <img src={image} alt={imageAlt} width="2400" height="1200" fetchpriority="high" class="absolute inset-0 -z-20 h-full w-full object-cover" style={`object-position:${position}`} />
@@ -20,7 +20,7 @@ const { title, eyebrow, lede, image, imageAlt = '', position = 'center', crumbs 
       </nav>
     )}
     {eyebrow && <p class="eyebrow !text-taupe-light">{eyebrow}</p>}
-    <h1 class="mt-4 max-w-3xl font-serif text-5xl leading-[1.05] md:text-7xl">{title}</h1>
+    <h1 class="mt-4 max-w-3xl font-serif text-5xl leading-[1.05] md:text-7xl">{title}{titleAccent && <> <span class="text-taupe-light">{titleAccent}</span></>}</h1>
     {lede && <p class="mt-6 max-w-xl text-lg text-white/80 md:text-xl">{lede}</p>}
     {areas && (
       <div class="mt-12 border-t border-white/20 pt-8 md:mt-16">

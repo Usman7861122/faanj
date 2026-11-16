@@ -1,0 +1,47 @@
+---
+import PageLayout from '../../../layouts/PageLayout.astro';
+import ServiceDetail from '../../../components/sections/ServiceDetail.astro';
+import { serviceContent } from '../../../data/serviceContent';
+import { achillesLocalPages } from '../../../data/achillesLocal';
+
+export function getStaticPaths() {
+  const base = serviceContent.find((c) => c.slug === 'achilles-tendonitis')!;
+  return achillesLocalPages.map((l) => ({ params: { slug: base.slug, location: l.id }, props: { base, l } }));
+}
+const { base, l } = Astro.props;
+const c = {
+  ...base,
+  title: `${l.title} ${l.accent}`,
+  hero: '/images/services/achilles/local/hero.jpg',
+  heroAlt: l.heroAlt,
+  heroPos: '60% 55%',
+  whatTitle: l.whatTitle,
+  what: l.what,
+  whatImg: '/images/services/achilles/local/consult.jpg',
+  whatImgAlt: l.whatImgAlt,
+  symptomsTitle: l.symptomsTitle,
+  causesTitle: l.causesTitle,
+  treatTitle: l.treatTitle,
+  treatText: l.treatText,
+  treatments: l.treatments,
+  treatImg: '/images/services/achilles/local/band.jpg',
+  treatImgAlt: l.treatImgAlt,
+  tipsTitle: l.tipsTitle,
+  tips: l.tips,
+};
+---
+<PageLayout
+  title={l.title}
+  titleAccent={l.accent}
+  metaTitle={`${l.title} ${l.accent}, NJ`}
+  eyebrow={`${l.city} Office`}
+  lede={l.lede}
+  description={l.description}
+  image={c.hero}
+  imageAlt={c.heroAlt}
+  position={c.heroPos}
+  areas={l.areas}
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: base.title, href: `/services/${base.slug}` }, { label: l.city }]}
+>
+  <ServiceDetail c={c} local={l} />
+</PageLayout>

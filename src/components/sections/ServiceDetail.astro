@@ -5,10 +5,12 @@ import ServicesGrid from './ServicesGrid.astro';
 import Insurance from './Insurance.astro';
 import { site } from '../../data/site';
 import type { ServiceContent } from '../../data/serviceContent';
+import type { LocalPage } from '../../data/achillesLocal';
 
-interface Props { c: ServiceContent }
-const { c } = Astro.props;
+interface Props { c: ServiceContent; local?: LocalPage }
+const { c, local } = Astro.props;
 const tel = `tel:${site.phone.replace(/-/g, '')}`;
+const telLocal = local ? `tel:${local.phone.replace(/-/g, '')}` : tel;
 ---
 <!-- What is it -->
 <section class="aurora py-24 md:py-28">
@@ -19,9 +21,15 @@ const tel = `tel:${site.phone.replace(/-/g, '')}`;
       <div class="mt-6 space-y-5 text-lg leading-relaxed text-taupe-dark">
         {c.what.map((p) => <p>{p}</p>)}
       </div>
+      {local && (
+        <p class="mt-8 flex items-start gap-3 text-[15px] text-taupe-dark">
+          <svg viewBox="0 0 24 24" class="mt-0.5 h-5 w-5 shrink-0 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Our {local.city} office: {local.address}</span>
+        </p>
+      )}
       <div class="mt-9 flex flex-wrap gap-4">
         <a href={site.appointment} class="btn btn-dark">Book Appointment</a>
-        <a href={tel} class="btn btn-light">Call {site.phone}</a>
+        <a href={telLocal} class="btn btn-light">Call {local ? local.phone : site.phone}</a>
       </div>
     </Reveal>
     <Reveal client:visible delay={0.12} className="lg:col-span-5">
@@ -111,6 +119,33 @@ const tel = `tel:${site.phone.replace(/-/g, '')}`;
   </div>
 </section>
 
-<LocationCards title={`Get ${c.title} care near you`} />
+{local && (
+  <section class="bg-mist py-24">
+    <div class="mx-auto max-w-4xl px-6">
+      <Reveal client:visible>
+        <h2 class="text-center font-serif text-4xl md:text-5xl">{local.faqTitle}</h2>
+        <div class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+          {local.faqs.map((f) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-serif text-2xl transition-colors hover:text-gold-deep">
+                {f.q}
+                <span class="text-gold-deep transition-transform duration-300 group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p class="mt-3 text-lg leading-relaxed text-taupe-dark">{f.a}</p>
+            </details>
+          ))}
+        </div>
+      </Reveal>
+    </div>
+  </section>
+)}
+
+<LocationCards
+  title={local ? local.locationsTitle : `Get ${c.title} care near you`}
+  hrefBase={`/services/${c.slug}`}
+  serviceTitle={local ? local.title : c.title}
+  currentId={local?.id}
+  text={local ? `Book Achilles Tendonitis care in ${local.city} or at one of our other two New Jersey offices.` : undefined}
+/>
 <ServicesGrid exclude={c.slug} />
 <Insurance />
