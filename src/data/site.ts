@@ -102,6 +102,14 @@ export const locations = [
   { id: 'union', name: 'Union', address: '440 Chestnut Street, 2nd Floor, Union, NJ 07083', phone: '908-688-0113' },
 ];
 
+// Online scheduling links (same ones the old site uses on its /appointment page)
+const SCHED = 'https://consumer.scheduling.athena.io/?locationId=';
+export const bookingOffices = [
+  { id: 'scotch-plains', name: 'Scotch Plains', address: '2265 South Ave, Scotch Plains, NJ 07076', url: `${SCHED}11307-27` },
+  { id: 'jersey-city', name: 'Jersey City', address: '1 Journal Square Plaza, 2nd Floor, Jersey City, NJ 07306', url: `${SCHED}11307-28&practitionerId=11307-12` },
+  { id: 'union', name: 'Union', address: '440 Chestnut Street, 2nd Floor, Union, NJ 07083', url: `${SCHED}11307-3` },
+];
+
 export const insurance = [
   '1771751.png', 'Insurance-1.png', 'Insurance-12.png', 'Insurance-13.jpg', 'Insurance-14.png', 'Insurance-15.png',
   'Insurance-16.png', 'Insurance-17.png', 'Insurance-18.png', 'Insurance-119.png', 'Insurance-1112.png',

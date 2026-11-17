@@ -1,0 +1,32 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { bookingOffices } from '../data/site';
+---
+<PageLayout
+  title="Book Your Appointment"
+  eyebrow="Book Online"
+  lede="Choose the office you want to visit. You will go to our secure scheduling page."
+  description="Book an appointment with Foot & Ankle Specialists of New Jersey at our Scotch Plains, Jersey City or Union office."
+  image="/images/practice/hero.jpg"
+  imageAlt="Bright, modern reception area at a podiatry office in New Jersey"
+  position="center 60%"
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Appointment' }]}
+>
+  <section class="aurora py-24 md:py-28">
+    <div class="mx-auto max-w-3xl px-6">
+      <ul class="space-y-4">
+        {bookingOffices.map((o) => (
+          <li>
+            <a href={o.url} target="_blank" rel="noopener" class="group flex items-center gap-5 rounded-2xl border border-ink/15 bg-white px-7 py-6 transition duration-300 hover:-translate-y-1 hover:border-taupe hover:bg-taupe hover:shadow-xl hover:shadow-ink/10">
+              <span class="flex-1">
+                <span class="block text-sm font-semibold uppercase tracking-[0.16em]">{o.name} Location</span>
+                <span class="mt-1 block text-taupe-dark group-hover:text-ink">{o.address}</span>
+              </span>
+              <span aria-hidden="true" class="text-xl">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</PageLayout>
