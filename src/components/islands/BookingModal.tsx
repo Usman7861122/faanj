@@ -46,7 +46,7 @@ export default function BookingModal({ offices }: { offices: BookingOffice[] }) 
           <motion.div
             initial={{ opacity: 0, y: 24, scale: 0.97 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 16, scale: 0.98 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-md rounded-2xl border border-white/10 bg-ink p-7 text-white shadow-2xl shadow-black/50 md:p-9"
+            className="relative w-full max-w-xl rounded-2xl border border-white/10 bg-ink p-7 text-white shadow-2xl shadow-black/50 md:p-10"
           >
             <button type="button" onClick={() => setOpen(false)} aria-label="Close"
               className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-white/70 transition hover:bg-white/10 hover:text-white">
