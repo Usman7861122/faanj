@@ -3,7 +3,7 @@ import HeroText from '../islands/HeroText';
 import { site } from '../../data/site';
 ---
 <section class="relative flex min-h-svh items-center overflow-hidden bg-ink" aria-label="Welcome">
-  <video class="absolute inset-0 h-full w-full object-cover" autoplay muted loop playsinline preload="metadata" poster="/images/site/video-poster.jpg" aria-hidden="true">
+  <video class="absolute inset-0 h-full w-full transform-gpu object-cover" autoplay muted loop playsinline preload="metadata" poster="/images/site/video-poster.jpg" aria-hidden="true">
     <source src="/video/Footankle-1+Desktop.mp4" type="video/mp4" />
   </video>
   <div class="hero-veil absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/60 to-ink/20"></div>
@@ -15,6 +15,15 @@ import { site } from '../../data/site';
 </section>
 
 <script>
+  // Big screens: pause the video while scrolling so the page stays smooth, resume when scrolling stops
   const v = document.querySelector('section[aria-label="Welcome"] video') as HTMLVideoElement | null;
-  if (v) new IntersectionObserver(([e]) => { e.isIntersecting ? v.play().catch(() => {}) : v.pause(); }).observe(v);
+  if (v) {
+    let visible = true, t = 0;
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; visible ? v.play().catch(() => {}) : v.pause(); }).observe(v);
+    addEventListener('scroll', () => {
+      if (!visible) return;
+      v.pause(); clearTimeout(t);
+      t = window.setTimeout(() => v.play().catch(() => {}), 180);
+    }, { passive: true });
+  }
 </script>

@@ -71,7 +71,7 @@
   /* Soft aurora background for white sections */
   .aurora { position: relative; overflow: hidden; background: #fff; }
   .aurora::before, .aurora::after {
-    content: ""; position: absolute; z-index: 0; width: 60vw; height: 60vw; border-radius: 50%;
+    content: ""; position: absolute; z-index: 0; width: min(60vw, 900px); height: min(60vw, 900px); border-radius: 50%;
     opacity: .35; pointer-events: none; 
   }
   .aurora::before { top: -20vw; left: -10vw; background: radial-gradient(circle, #b9e0dc, transparent 70%);  }
