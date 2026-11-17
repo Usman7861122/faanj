@@ -100,15 +100,15 @@
 
 /* Logo theme: charcoal + warm grey taken from the logo (used by /home-2) */
 .theme-logo {
-  --color-ink: #282828;
-  --color-ink-deep: #1a1a1a;
-  --color-taupe: #9a9a8a;
-  --color-taupe-light: #cfcfc3;
-  --color-taupe-dark: #55554e;
-  --color-gold-deep: #6f6f62;
-  --color-mist: #f4f4f1;
-  --particle-1: 207,207,195;
-  --particle-2: 154,154,138;
+  --color-ink: #141414;
+  --color-ink-deep: #0a0a0a;
+  --color-taupe: #ffcf40;
+  --color-taupe-light: #ffe08a;
+  --color-taupe-dark: #4a4a45;
+  --color-gold-deep: #8a6500;
+  --color-mist: #f6f5f0;
+  --particle-1: 255,224,138;
+  --particle-2: 255,207,64;
 }
 .theme-logo .aurora::before { background: radial-gradient(circle, #e4e4dc, transparent 65%); }
 .theme-logo .aurora::after { background: radial-gradient(circle, #efe9dd, transparent 65%); }
