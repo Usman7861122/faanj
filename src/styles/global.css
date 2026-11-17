@@ -157,3 +157,9 @@
 .theme-logo .hero-copy { text-shadow: 0 2px 14px rgba(0,0,0,.65), 0 1px 3px rgba(0,0,0,.6); }
 .theme-logo .hero-accent { color: #ffcf40; font-style: italic; }
 .theme-logo .eyebrow.\!text-taupe-light { color: #ffcf40 !important; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
+
+/* Light tint so hero text and the header stay readable over the video */
+.theme-logo .hero-veil { display: block; opacity: .55; }
+.theme-logo .hero-copy { text-shadow: 0 2px 18px rgba(0,0,0,.8), 0 1px 4px rgba(0,0,0,.7); }
+.theme-logo #site-header:not(.header-solid) { background-image: linear-gradient(to bottom, rgb(0 0 0 / .65), rgb(0 0 0 / .25) 70%, transparent); }
+.theme-logo #site-header nav a, .theme-logo #site-header .font-serif { text-shadow: 0 1px 6px rgba(0,0,0,.6); }
