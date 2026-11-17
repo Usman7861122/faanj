@@ -58,31 +58,6 @@ const ic: Record<string, string> = {
   </div>
 </section>
 
-<!-- Focus areas -->
-<section class="bg-mist py-24 md:py-28">
-  <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-24">
-    <Reveal client:visible>
-      <img src={p.sectionImg} alt={p.sectionAlt} width="1400" height="1400" loading="lazy" class="img-sq aspect-square w-full object-cover shadow-2xl shadow-ink/10" />
-    </Reveal>
-    <Reveal client:visible delay={0.12}>
-      <p class="eyebrow">Your First Visit</p>
-      <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">{p.focusTitle.replace('treats', 'will do for you')}</h2>
-      <ol class="mt-10">
-        {visit.map((v, n) => (
-          <li class="group flex items-start gap-5 border-b border-ink/10 py-5 first:border-t">
-            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold-deep/40 font-serif text-lg text-gold-deep transition-colors duration-300 group-hover:bg-ink group-hover:text-taupe-light">{n + 1}</span>
-            <span>
-              <span class="block font-serif text-2xl transition-colors group-hover:text-gold-deep">{v.t}</span>
-              <span class="mt-1 block leading-relaxed text-taupe-dark">{v.d}</span>
-            </span>
-          </li>
-        ))}
-      </ol>
-      <a href={site.appointment} class="btn btn-dark btn-yellow mt-9">Book your visit</a>
-    </Reveal>
-  </div>
-</section>
-
 <!-- Education and training -->
 <section class="relative overflow-hidden bg-ink py-24 text-white md:py-28">
   <div class="mx-auto max-w-7xl px-6">
