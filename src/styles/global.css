@@ -163,3 +163,7 @@
 .theme-logo .hero-copy { text-shadow: 0 2px 18px rgba(0,0,0,.8), 0 1px 4px rgba(0,0,0,.7); }
 .theme-logo #site-header:not(.header-solid) { background-image: linear-gradient(to bottom, rgb(0 0 0 / .65), rgb(0 0 0 / .25) 70%, transparent); }
 .theme-logo #site-header nav a, .theme-logo #site-header .font-serif { text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+
+/* Header: whiter, slightly heavier text */
+.theme-logo #site-header .logo-img { filter: brightness(1.6) contrast(1.1) drop-shadow(0 1px 4px rgba(0,0,0,.5)); }
+.theme-logo #site-header nav a { text-shadow: 0 1px 8px rgba(0,0,0,.75); }
