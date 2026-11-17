@@ -26,10 +26,10 @@ export default function HeroText({ appointment, phone }: { appointment: string; 
       <div className="mt-5 min-h-[17rem] md:min-h-[21rem]">
         <AnimatePresence mode="wait">
           <motion.div key={i} initial={i === 0 ? false : { opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} transition={{ duration: 0.7, ease }}>
-            <motion.h1 {...(i === 0 ? up(0.4) : {})} className="hero-copy font-serif text-5xl leading-[1.05] text-white md:text-7xl">
-              {v.a} <em className="hero-accent text-taupe-light">{v.b}</em>
+            <motion.h1 {...(i === 0 ? up(0.4) : {})} className="font-serif text-5xl leading-[1.05] text-white md:text-7xl">
+              {v.a} <em className="text-taupe-light">{v.b}</em>
             </motion.h1>
-            <motion.p {...(i === 0 ? up(0.65) : {})} className="hero-copy mt-6 max-w-xl text-lg text-white/90">{v.text}</motion.p>
+            <motion.p {...(i === 0 ? up(0.65) : {})} className="mt-6 max-w-xl text-lg text-white/80">{v.text}</motion.p>
           </motion.div>
         </AnimatePresence>
       </div>

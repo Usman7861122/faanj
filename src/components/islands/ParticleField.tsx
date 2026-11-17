@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 // Soft particles that gently drift away from the cursor. Very light on CPU.
-export default function ParticleField({ color, tone = '1', count = 24 }: { color?: string; tone?: '1' | '2'; count?: number }) {
+export default function ParticleField({ color, tone = '1', count = 46 }: { color?: string; tone?: '1' | '2'; count?: number }) {
   const ref = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     const c = ref.current!; const ctx = c.getContext('2d')!;
@@ -13,10 +13,7 @@ export default function ParticleField({ color, tone = '1', count = 24 }: { color
     const move = (e: MouseEvent) => { const r = c.getBoundingClientRect(); m.x = e.clientX - r.left; m.y = e.clientY - r.top; };
     c.parentElement!.addEventListener('mousemove', move);
     c.parentElement!.addEventListener('mouseleave', () => { m.x = m.y = -999; });
-    let lastT = 0;
-    const tick = (now = 0) => {
-      if (now - lastT < 50) { raf = requestAnimationFrame(tick); return; }
-      lastT = now;
+    const tick = () => {
       ctx.clearRect(0, 0, w, h);
       for (const p of P) {
         p.x = (p.x + p.vx + 1) % 1; p.y = (p.y + p.vy + 1) % 1;
@@ -27,13 +24,8 @@ export default function ParticleField({ color, tone = '1', count = 24 }: { color
       }
       raf = requestAnimationFrame(tick);
     };
-    let on = false;
-    const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !on) { on = true; tick(); }
-      else if (!e.isIntersecting && on) { on = false; cancelAnimationFrame(raf); }
-    });
-    io.observe(c);
-    return () => { io.disconnect(); cancelAnimationFrame(raf); removeEventListener('resize', size); };
+    tick();
+    return () => { cancelAnimationFrame(raf); removeEventListener('resize', size); };
   }, []);
   return <canvas ref={ref} aria-hidden className="absolute inset-0 h-full w-full" />;
 }

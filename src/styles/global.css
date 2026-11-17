@@ -72,10 +72,10 @@
   .aurora { position: relative; overflow: hidden; background: #fff; }
   .aurora::before, .aurora::after {
     content: ""; position: absolute; z-index: 0; width: 60vw; height: 60vw; border-radius: 50%;
-    opacity: .35; pointer-events: none; 
+    filter: blur(90px); opacity: .35; pointer-events: none;
   }
-  .aurora::before { top: -20vw; left: -10vw; background: radial-gradient(circle, #b9e0dc, transparent 70%);  }
-  .aurora::after { bottom: -25vw; right: -10vw; background: radial-gradient(circle, #f1e2b8, transparent 65%);  }
+  .aurora::before { top: -20vw; left: -10vw; background: radial-gradient(circle, #b9e0dc, transparent 65%); animation: drift-a 22s ease-in-out infinite alternate; }
+  .aurora::after { bottom: -25vw; right: -10vw; background: radial-gradient(circle, #f1e2b8, transparent 65%); animation: drift-b 28s ease-in-out infinite alternate; }
   .aurora > * { position: relative; z-index: 1; }
 }
 
@@ -90,6 +90,8 @@
 /* Header turns solid after scrolling (home page overlay mode) */
 #site-header.header-solid {
   background-color: rgb(10 42 46 / 0.96);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
   box-shadow: 0 10px 30px -12px rgb(0 0 0 / 0.35);
 }
 
@@ -98,15 +100,15 @@
 
 /* Logo theme: charcoal + warm grey taken from the logo (used by /home-2) */
 .theme-logo {
-  --color-ink: #141414;
-  --color-ink-deep: #0a0a0a;
-  --color-taupe: #ffcf40;
-  --color-taupe-light: #ffe08a;
-  --color-taupe-dark: #4a4a45;
-  --color-gold-deep: #8a6500;
-  --color-mist: #f6f5f0;
-  --particle-1: 255,224,138;
-  --particle-2: 255,207,64;
+  --color-ink: #282828;
+  --color-ink-deep: #1a1a1a;
+  --color-taupe: #9a9a8a;
+  --color-taupe-light: #cfcfc3;
+  --color-taupe-dark: #55554e;
+  --color-gold-deep: #6f6f62;
+  --color-mist: #f4f4f1;
+  --particle-1: 207,207,195;
+  --particle-2: 154,154,138;
 }
 .theme-logo .aurora::before { background: radial-gradient(circle, #e4e4dc, transparent 65%); }
 .theme-logo .aurora::after { background: radial-gradient(circle, #efe9dd, transparent 65%); }
@@ -140,24 +142,3 @@
 /* /home-2: footer and photo band booking buttons are white, not yellow */
 .theme-logo .btn-appt.btn-ghost { background: #fff; color: #282828; border: 1px solid rgb(0 0 0 / .1); }
 .theme-logo .btn-appt.btn-ghost:hover { background: #ffcf40; color: #000; box-shadow: none; }
-
-/* /home-2: old-site theme. Buttons are black and yellow; hero video is natural (no tint) with text shadow for legibility */
-.theme-logo .btn, .theme-logo .btn-dark, .theme-logo .btn-light, .theme-logo .btn-appt.btn-ghost {
-  background: #111 !important; color: #fff !important; border: 1px solid rgb(255 255 255 / .25) !important; border-radius: 5px;
-  box-shadow: 0 6px 16px -8px rgba(0,0,0,.4);
-}
-.theme-logo .btn:hover, .theme-logo .btn-dark:hover, .theme-logo .btn-light:hover, .theme-logo .btn-appt.btn-ghost:hover, .theme-logo .group:hover .btn {
-  background: #ffcf40 !important; color: #000 !important; border-color: #ffcf40 !important;
-}
-.theme-logo .btn.btn-yellow { background: #ffcf40 !important; color: #000 !important; border-color: #ffcf40 !important; }
-.theme-logo .btn.btn-yellow:hover { background: #111 !important; color: #fff !important; border-color: rgb(255 255 255 / .25) !important; }
-.theme-logo .hero-veil { display: none; }
-.theme-logo .hero-copy { text-shadow: 0 2px 14px rgba(0,0,0,.65), 0 1px 3px rgba(0,0,0,.6); }
-.theme-logo .hero-accent { color: #ffcf40; font-style: italic; }
-.theme-logo .eyebrow.\!text-taupe-light { color: #ffcf40 !important; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
-
-/* Light tint so hero text and the header stay readable over the video */
-.theme-logo .hero-veil { display: block; opacity: .55; }
-.theme-logo .hero-copy { text-shadow: 0 1px 6px rgba(0,0,0,.6); }
-
-/* Header: whiter, slightly heavier text */

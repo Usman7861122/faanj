@@ -8,12 +8,6 @@ interface Props { p: Profile }
 const { p } = Astro.props;
 const me = providers.find((x) => x.slug === p.slug)!;
 const others = providers.filter((x) => x.slug !== p.slug);
-const visit = [
-  { t: 'Tell us your story', d: 'We start by listening: where it hurts, when it started and what you want to get back to doing.' },
-  { t: 'A careful exam', d: 'A hands-on check of your feet, ankles and the way you walk, with imaging when it helps.' },
-  { t: 'A plan made with you', d: 'We explain your options in plain words, from simple care at home to procedures, and you decide together with us.' },
-  { t: 'Support after your visit', d: 'Clear next steps and follow-up, so you always know what to do and who to call.' },
-];
 const tel = `tel:${site.phone.replace(/-/g, '')}`;
 const offices = p.offices.map((name) => {
   const l = locations.find((x) => x.name === name);
@@ -54,6 +48,30 @@ const ic: Record<string, string> = {
         <a href={site.appointment} class="btn-appt"><span class="btn-fill"></span><span>Book with {p.short}</span></a>
         <a href={tel} class="btn btn-dark">Call {site.phone}</a>
       </div>
+    </Reveal>
+  </div>
+</section>
+
+<!-- Focus areas -->
+<section class="bg-mist py-24 md:py-28">
+  <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-24">
+    <Reveal client:visible>
+      <img src={p.sectionImg} alt={p.sectionAlt} width="1400" height="1400" loading="lazy" class="img-sq aspect-square w-full object-cover shadow-2xl shadow-ink/10" />
+    </Reveal>
+    <Reveal client:visible delay={0.12}>
+      <p class="eyebrow">Areas of Focus</p>
+      <h2 class="mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">{p.focusTitle}</h2>
+      <ul class="mt-10">
+        {p.focus.map((f) => (
+          <li class="group flex items-center gap-5 border-b border-ink/10 py-5 first:border-t">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold-deep/40 text-gold-deep transition-colors duration-300 group-hover:bg-ink group-hover:text-taupe-light">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={ic[f.i]} />
+            </span>
+            <span class="font-serif text-2xl transition-colors group-hover:text-gold-deep">{f.t}</span>
+          </li>
+        ))}
+      </ul>
+      <a href="/services" class="btn btn-dark mt-9">View our services</a>
     </Reveal>
   </div>
 </section>
