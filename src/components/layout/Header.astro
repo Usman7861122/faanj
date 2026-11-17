@@ -1,5 +1,5 @@
 ---
-import { nav, site, providers } from '../../data/site';
+import { nav, site, providers, locations } from '../../data/site';
 import MobileMenu from '../islands/MobileMenu';
 interface Props { overlay?: boolean }
 const { overlay = false } = Astro.props;
@@ -117,6 +117,26 @@ const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] font-med
                       ))}
                     </ul>
                   </div>
+                )}
+
+                {n.label === 'Locations' && (
+                  <ul>
+                    {n.children.map((c, k) => {
+                      const loc = locations.find((l) => c.href?.endsWith(`#${l.id}`));
+                      return (
+                        <li>
+                          <a href={c.href} class="group/row flex items-center gap-4 border-b border-white/10 py-3.5 text-white/90 transition-colors last:border-0 hover:text-white">
+                            <span class="w-6 font-serif text-sm text-taupe/80 transition-colors group-hover/row:text-taupe">{String(k + 1).padStart(2, '0')}</span>
+                            <span class="flex-1">
+                              <span class="block font-serif text-xl">{c.label}</span>
+                              <span class="block text-[11px] tracking-[0.04em] text-white/60">{loc?.address}</span>
+                            </span>
+                            <span class="-translate-x-2 text-taupe opacity-0 transition duration-300 group-hover/row:translate-x-0 group-hover/row:opacity-100">→</span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
                 )}
 
                 {n.label === 'Testimonials' && n.children.map((c) => (

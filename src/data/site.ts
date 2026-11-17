@@ -64,6 +64,15 @@ export const nav: NavItem[] = [
       { label: 'View More Services', href: '/services' },
     ],
   },
+  {
+    label: 'Locations',
+    href: '/contact',
+    children: [
+      { label: 'Scotch Plains', href: '/contact#scotch-plains' },
+      { label: 'Jersey City', href: '/contact#jersey-city' },
+      { label: 'Union', href: '/contact#union' },
+    ],
+  },
   { label: 'Blogs', href: '/blogs' },
   { label: 'Testimonials', href: '/testimonials'},
   { label: 'Contact', href: '/contact' },
