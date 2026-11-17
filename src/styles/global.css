@@ -142,3 +142,18 @@
 /* /home-2: footer and photo band booking buttons are white, not yellow */
 .theme-logo .btn-appt.btn-ghost { background: #fff; color: #282828; border: 1px solid rgb(0 0 0 / .1); }
 .theme-logo .btn-appt.btn-ghost:hover { background: #ffcf40; color: #000; box-shadow: none; }
+
+/* /home-2: old-site theme. Buttons are black and yellow; hero video is natural (no tint) with text shadow for legibility */
+.theme-logo .btn, .theme-logo .btn-dark, .theme-logo .btn-light, .theme-logo .btn-appt.btn-ghost {
+  background: #111 !important; color: #fff !important; border: 1px solid rgb(255 255 255 / .25) !important; border-radius: 5px;
+  box-shadow: 0 6px 16px -8px rgba(0,0,0,.4);
+}
+.theme-logo .btn:hover, .theme-logo .btn-dark:hover, .theme-logo .btn-light:hover, .theme-logo .btn-appt.btn-ghost:hover, .theme-logo .group:hover .btn {
+  background: #ffcf40 !important; color: #000 !important; border-color: #ffcf40 !important;
+}
+.theme-logo .btn.btn-yellow { background: #ffcf40 !important; color: #000 !important; border-color: #ffcf40 !important; }
+.theme-logo .btn.btn-yellow:hover { background: #111 !important; color: #fff !important; border-color: rgb(255 255 255 / .25) !important; }
+.theme-logo .hero-veil { display: none; }
+.theme-logo .hero-copy { text-shadow: 0 2px 14px rgba(0,0,0,.65), 0 1px 3px rgba(0,0,0,.6); }
+.theme-logo .hero-accent { color: #ffcf40; font-style: italic; }
+.theme-logo .eyebrow.\!text-taupe-light { color: #ffcf40 !important; text-shadow: 0 1px 8px rgba(0,0,0,.7); }
