@@ -42,5 +42,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     </main>
     <Footer />
     <CookieBanner client:load />
+    <script is:inline>
+      // Smoother scrolling: decode images off the main thread
+      document.querySelectorAll('img').forEach(function (i) { i.decoding = 'async'; });
+    </script>
   </body>
 </html>
