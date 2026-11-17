@@ -72,10 +72,10 @@
   .aurora { position: relative; overflow: hidden; background: #fff; }
   .aurora::before, .aurora::after {
     content: ""; position: absolute; z-index: 0; width: 60vw; height: 60vw; border-radius: 50%;
-    filter: blur(90px); opacity: .35; pointer-events: none;
+    opacity: .35; pointer-events: none; 
   }
-  .aurora::before { top: -20vw; left: -10vw; background: radial-gradient(circle, #b9e0dc, transparent 65%); animation: drift-a 22s ease-in-out infinite alternate; }
-  .aurora::after { bottom: -25vw; right: -10vw; background: radial-gradient(circle, #f1e2b8, transparent 65%); animation: drift-b 28s ease-in-out infinite alternate; }
+  .aurora::before { top: -20vw; left: -10vw; background: radial-gradient(circle, #b9e0dc, transparent 70%);  }
+  .aurora::after { bottom: -25vw; right: -10vw; background: radial-gradient(circle, #f1e2b8, transparent 65%);  }
   .aurora > * { position: relative; z-index: 1; }
 }
 
@@ -167,5 +167,5 @@
 .theme-logo #site-header nav a, .theme-logo #site-header .font-serif { text-shadow: 0 1px 6px rgba(0,0,0,.6); }
 
 /* Header: whiter, slightly heavier text */
-.theme-logo #site-header .logo-img { filter: brightness(1.6) contrast(1.1) drop-shadow(0 1px 4px rgba(0,0,0,.5)); }
+.theme-logo #site-header .logo-img { filter: brightness(1.6) contrast(1.1); }
 .theme-logo #site-header nav a { text-shadow: 0 1px 8px rgba(0,0,0,.75); }
