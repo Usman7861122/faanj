@@ -66,6 +66,18 @@ export const nav: NavItem[] = [
     ],
   },
   {
+    label: 'Conditions',
+    href: '/conditions',
+    children: [
+      { label: 'Toes and Toenails', href: '/conditions' },
+      { label: 'Ball of the Foot', href: '/conditions' },
+      { label: 'Midfoot and Arch', href: '/conditions' },
+      { label: 'Heel and Hindfoot', href: '/conditions' },
+      { label: 'Ankle', href: '/conditions' },
+      { label: 'Multiple Areas', href: '/conditions' },
+    ],
+  },
+  {
     label: 'Locations',
     href: '/contact',
     children: [

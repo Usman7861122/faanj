@@ -1,5 +1,6 @@
 ---
 import { nav, site, providers, locations } from '../../data/site';
+import { conditions, conditionRegions } from '../../data/conditions';
 import MobileMenu from '../islands/MobileMenu';
 interface Props { overlay?: boolean }
 const { overlay = false } = Astro.props;
@@ -30,7 +31,8 @@ const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] font-med
   <nav class="hidden lg:block" aria-label="Main">
     <ul class="relative mx-auto flex h-12 max-w-7xl items-center justify-center gap-10 px-6">
       {nav.map((n) => {
-        const mega = n.label === 'Services';
+        const condMega = n.label === 'Conditions';
+        const mega = n.label === 'Services' || condMega;
         return (
         <li class:list={['group flex h-full items-center', !mega && 'relative']}>
           <a href={n.href} class={`${link} flex items-center gap-1.5`} target={n.external ? '_blank' : undefined} rel={n.external ? 'noopener' : undefined}>
@@ -39,9 +41,36 @@ const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] font-med
           </a>
 
           {n.children && (
-            <div class:list={[panel, mega ? 'left-1/2 w-[min(56rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Our Practice' ? 'left-1/2 w-[min(44rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Providers' ? 'left-1/2 w-[min(46rem,calc(100vw-3rem))] -translate-x-1/2' : 'left-1/2 w-[26rem] -translate-x-1/2']}>
+            <div class:list={[panel, condMega ? 'left-1/2 w-[min(68rem,calc(100vw-3rem))] -translate-x-1/2' : mega ? 'left-1/2 w-[min(56rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Our Practice' ? 'left-1/2 w-[min(44rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Providers' ? 'left-1/2 w-[min(46rem,calc(100vw-3rem))] -translate-x-1/2' : 'left-1/2 w-[26rem] -translate-x-1/2']}>
               <div class="rounded-2xl border border-white/10 bg-ink-deep/95 p-5 shadow-2xl shadow-black/40 backdrop-blur-xl">
-                {mega && (
+                {condMega && (
+                  <div class="p-1">
+                    <div class="flex items-end justify-between gap-6 border-b border-white/10 pb-4">
+                      <div>
+                        <p class="text-[10px] uppercase tracking-[0.28em] text-taupe">Conditions We Treat</p>
+                        <p class="mt-2 font-serif text-3xl leading-tight text-white">Find your condition</p>
+                      </div>
+                      <a href="/conditions" class="btn btn-light !min-h-11 !px-5 !text-[11px]">View all conditions</a>
+                    </div>
+                    <div class="mt-5 grid grid-cols-3 gap-x-8 gap-y-6">
+                      {conditionRegions.map((r) => {
+                        const list = conditions.filter((c) => c.region === r);
+                        return (
+                          <div>
+                            <p class="font-serif text-xl text-taupe">{r}</p>
+                            <ul class="mt-2">
+                              {list.slice(0, 5).map((c) => (
+                                <li><a href={`/conditions/${c.slug}`} class="block truncate border-b border-white/10 py-2 text-[14px] text-white/80 transition-colors hover:text-white" title={c.title}>{c.title}</a></li>
+                              ))}
+                            </ul>
+                            <a href="/conditions" class="mt-2 inline-block text-[11px] uppercase tracking-[0.18em] text-taupe-light hover:text-white">+ {Math.max(list.length - 5, 0)} more →</a>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
+                {n.label === 'Services' && (
                   <div class="grid grid-cols-[15rem_1fr] gap-8 p-1">
                     <div class="flex flex-col justify-between border-r border-white/10 pr-8">
                       <div>
