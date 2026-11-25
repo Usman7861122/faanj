@@ -49,10 +49,13 @@ const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] font-med
                         <p class="mt-3 font-serif text-3xl leading-tight text-white">Conditions we treat</p>
                         <p class="mt-3 text-sm leading-relaxed text-white/65">Expert care for the foot and ankle, from everyday pain to complex surgery.</p>
                       </div>
-                      <a href="/services" class="btn btn-light mt-6 !min-h-11 !px-5 !text-[11px]">View all services</a>
+                      <div class="mt-6 flex flex-wrap gap-3">
+                        <a href="/services" class="btn btn-light !min-h-11 !px-5 !text-[11px]">View all services</a>
+                        <a href="/conditions" class="btn btn-light !min-h-11 !px-5 !text-[11px]">Conditions we treat</a>
+                      </div>
                     </div>
                     <ul class="grid grid-cols-2 gap-x-8">
-                      {n.children.filter((c) => c.label !== 'View More Services').map((c, k) => (
+                      {n.children.filter((c) => c.label !== 'View More Services' && c.label !== 'Conditions We Treat').map((c, k) => (
                         <li>
                           <a href={c.href} class="group/row flex items-center gap-4 border-b border-white/10 py-3.5 text-white/85 transition-colors hover:text-white">
                             <span class="w-6 font-serif text-sm text-taupe/80 transition-colors group-hover/row:text-taupe">{String(k + 1).padStart(2, '0')}</span>

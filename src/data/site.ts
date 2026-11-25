@@ -61,6 +61,7 @@ export const nav: NavItem[] = [
       { label: 'Heel Spur', href: '/services/heel-spur' },
       { label: 'Ingrown Toenail', href: '/services/ingrown-toenail' },
       { label: 'Athlete’s Foot', href: '/services/athletes-foot' },
+      { label: 'Conditions We Treat', href: '/conditions' },
       { label: 'View More Services', href: '/services' },
     ],
   },

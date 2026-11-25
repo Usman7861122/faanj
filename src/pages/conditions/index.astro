@@ -1,0 +1,52 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import ConditionBrowser from '../../components/islands/ConditionBrowser';
+import Reveal from '../../components/islands/Reveal';
+import GetInTouch from '../../components/sections/GetInTouch.astro';
+import { conditions, conditionRegions, conditionSourcesIntro, conditionSources } from '../../data/conditions';
+import { site } from '../../data/site';
+
+const items = conditions.map(({ slug, title, region }) => ({ slug, title, region }));
+const tel = `tel:${site.phone.replace(/-/g, '')}`;
+---
+<PageLayout
+  title="Conditions We Treat"
+  eyebrow="Foot & Ankle Conditions"
+  lede="From toes to ankle, learn what each condition is and how we treat it, with and without surgery."
+  description="Foot and ankle conditions treated by Foot & Ankle Specialists of New Jersey, from bunions and heel pain to ankle sprains, diabetic foot care and fractures."
+  metaTitle="Foot & Ankle Conditions We Treat"
+  image="/images/practice/hero.jpg"
+  imageAlt="Bright, modern reception area at a podiatry office in New Jersey"
+  position="center 60%"
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Services', href: '/services' }, { label: 'Conditions' }]}
+>
+  <section class="aurora py-24 md:py-28">
+    <div class="mx-auto max-w-5xl px-6">
+      <Reveal client:visible>
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow">Find Your Condition</p>
+          <h2 class="mt-4 text-balance font-serif text-4xl leading-[1.1] md:text-5xl">{conditions.length} foot and ankle conditions we care for</h2>
+          <p class="mt-5 text-lg text-taupe-dark">Many conditions do not need surgery. Treatment starts with an exam and, when needed, imaging or other tests. Not sure what you have? Call us and we will help.</p>
+        </div>
+      </Reveal>
+      <div class="mt-14">
+        <ConditionBrowser client:load items={items} regions={conditionRegions} />
+      </div>
+      <div class="mt-16 flex flex-wrap items-center justify-center gap-4">
+        <a href={site.appointment} class="btn-appt"><span class="btn-fill"></span><span>Book Appointment</span></a>
+        <a href={tel} class="btn btn-dark">Call {site.phone}</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-mist py-16">
+    <div class="mx-auto max-w-4xl px-6">
+      <h2 class="font-serif text-3xl">Clinical reference sources</h2>
+      <p class="mt-3 text-taupe-dark">{conditionSourcesIntro}</p>
+      <ul class="mt-6 grid gap-x-10 gap-y-2 text-sm text-taupe-dark md:grid-cols-2">
+        {conditionSources.map((s) => <li class="border-b border-ink/10 py-2">{s}</li>)}
+      </ul>
+    </div>
+  </section>
+  <GetInTouch />
+</PageLayout>
