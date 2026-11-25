@@ -247,7 +247,7 @@ const pageTitle = city ? `${c.title} treatment in ${city.city}, NJ` : c.title;
     </div>
   </section>
 
-  <LocationCards title={`Get care for ${lower} near you`} text="Book a visit at the office closest to you. We have three New Jersey locations." />
+  <LocationCards title={city ? `Get care for ${lower} in ${city.city} or nearby` : `Get care for ${lower} near you`} text="Choose an office to see care for this condition near you. We have three New Jersey locations." hrefBase={`/conditions/${c.slug}`} serviceTitle={c.title} currentId={loc} />
   <ServicesGrid />
   <Insurance />
 </PageLayout>
