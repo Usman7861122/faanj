@@ -1,0 +1,10 @@
+---
+import ConditionPage from '../../../components/sections/ConditionPage.astro';
+import { conditions } from '../../../data/conditions';
+import { cityInfo } from '../../../data/conditionCities';
+export function getStaticPaths() {
+  return conditions.flatMap((c) => cityInfo.map((l) => ({ params: { slug: c.slug, location: l.id }, props: { c, loc: l.id } })));
+}
+const { c, loc } = Astro.props;
+---
+<ConditionPage c={c} loc={loc} />
