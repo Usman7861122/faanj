@@ -1,11 +1,13 @@
-// Hero photo for each area, and links from a condition to our main service pages
-export const regionImages: Record<string, { img: string; alt: string; position: string }> = {
-  'Toes and Toenails': { img: '/images/services/ingrown-toenail/exam.jpg', alt: 'Podiatrist examining a patient’s toes', position: 'center 55%' },
-  'Ball of the Foot and Metatarsals': { img: '/images/services/hammer-toe/exam.jpg', alt: 'Podiatrist examining the front of a patient’s foot', position: 'center 55%' },
-  'Midfoot and Arch': { img: '/images/practice/orthotics.jpg', alt: 'Foot specialist checking a patient’s arch and orthotics', position: 'center 55%' },
-  'Heel and Hindfoot': { img: '/images/services/heel-pain/exam.jpg', alt: 'Podiatrist examining a patient’s heel', position: 'center 55%' },
-  'Ankle': { img: '/images/services/ankle-injuries/exam.jpg', alt: 'Specialist examining a patient’s ankle', position: 'center 55%' },
-  'Conditions Affecting Multiple Areas': { img: '/images/practice/consult.jpg', alt: 'Foot and ankle specialist talking with a patient', position: 'center 50%' },
+// Area photos used until a page has its own photos (same style as the service pages: hero, exam, therapy)
+const S = '/images/services';
+const t = (hero: string, about: string, treat: string, alt: string) => ({ hero, about, treat, alt });
+export const regionImages: Record<string, { hero: string; about: string; treat: string; alt: string }> = {
+  'Toes and Toenails': t(`${S}/ingrown-toenail/hero.jpg`, `${S}/ingrown-toenail/exam.jpg`, `${S}/ingrown-toenail/therapy.jpg`, 'Toe and toenail care at a podiatry office'),
+  'Ball of the Foot and Metatarsals': t(`${S}/hammer-toe/hero.jpg`, `${S}/hammer-toe/exam.jpg`, `${S}/hammer-toe/therapy.jpg`, 'Forefoot examination at a podiatry office'),
+  'Midfoot and Arch': t(`${S}/heel-spur/hero.jpg`, `${S}/heel-spur/exam.jpg`, `${S}/heel-spur/therapy.jpg`, 'Arch and midfoot care at a podiatry office'),
+  'Heel and Hindfoot': t(`${S}/heel-pain/hero.jpg`, `${S}/heel-pain/exam.jpg`, `${S}/heel-pain/therapy.jpg`, 'Heel examination at a podiatry office'),
+  'Ankle': t(`${S}/ankle-injuries/hero.jpg`, `${S}/ankle-injuries/exam.jpg`, `${S}/ankle-injuries/therapy.jpg`, 'Ankle examination at a podiatry office'),
+  'Conditions Affecting Multiple Areas': t(`${S}/athletes-foot/hero.jpg`, `${S}/athletes-foot/exam.jpg`, `${S}/athletes-foot/therapy.jpg`, 'Foot and ankle consultation at a podiatry office'),
 };
 
 export const relatedService: Record<string, string> = {
@@ -19,8 +21,3 @@ export const relatedService: Record<string, string> = {
   'athletes-foot-and-other-fungal-skin-conditions': 'athletes-foot',
 };
 
-// Photo for a single condition page (served from /images/conditions/<slug>.jpg). Missing ones fall back to the area photo.
-import { conditions } from './conditions';
-export const conditionImages: Record<string, string> = {};
-// filled at build time by checking which files exist is not possible in the browser, so list the slugs that have photos:
-export const slugsWithPhoto = new Set<string>([]);

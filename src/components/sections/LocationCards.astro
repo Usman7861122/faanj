@@ -28,7 +28,7 @@ const {
             <div class="relative aspect-[4/3] w-full overflow-hidden bg-mist">
               <iframe title={`Map of ${l.name} office`} loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="absolute inset-0 h-full w-full grayscale transition duration-500 group-hover:grayscale-0" src={`https://www.google.com/maps?q=${encodeURIComponent(l.address)}&output=embed`}></iframe>
             </div>
-            <a href={hrefBase ? `${hrefBase}/${l.id}` : `/locations/${l.id}`} class="flex flex-1 flex-col p-8">
+            <a href={hrefBase ? `${hrefBase}/${l.id}` : `/contact#${l.id}`} class="flex flex-1 flex-col p-8">
               <span class="flex items-center gap-3">
                 <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-gold-deep/40 text-gold-deep transition-colors duration-300 group-hover:bg-ink group-hover:text-taupe-light">
                   <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>

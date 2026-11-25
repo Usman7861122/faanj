@@ -1,135 +1,182 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import Reveal from '../../components/islands/Reveal';
-import GetInTouch from '../../components/sections/GetInTouch.astro';
+import LocationCards from '../../components/sections/LocationCards.astro';
+import ServicesGrid from '../../components/sections/ServicesGrid.astro';
+import Insurance from '../../components/sections/Insurance.astro';
 import { conditions } from '../../data/conditions';
-import { regionImages, relatedService, slugsWithPhoto } from '../../data/conditionMeta';
+import { regionImages, relatedService } from '../../data/conditionMeta';
+import { slugsWithPhoto } from '../../data/conditionPhotos';
 import { services, site } from '../../data/site';
 
 export function getStaticPaths() {
   return conditions.map((c) => ({ params: { slug: c.slug }, props: { c } }));
 }
 const { c } = Astro.props;
-const regionHero = regionImages[c.region];
-const photo = slugsWithPhoto.has(c.slug) ? `/images/conditions/${c.slug}.jpg` : null;
-const hero = photo ? { img: photo, alt: `${c.title}: foot and ankle care in New Jersey`, position: 'center 50%' } : regionHero;
-const lower = c.title.charAt(0).toLowerCase() + c.title.slice(1);
-const visit = [
-  { t: 'We listen', d: 'You tell us where it hurts, when it started and what you want to get back to doing.' },
-  { t: 'We examine', d: 'A hands-on exam of your foot and ankle and how you walk, with imaging or tests only when they help.' },
-  { t: 'We explain your options', d: 'You hear the likely cause and the choices in plain words, starting with care that does not need surgery.' },
-  { t: 'We follow up', d: 'You leave with clear next steps and a way to reach us if anything changes.' },
-];
-const faqs = [
-  { q: `Will I need surgery for ${lower}?`, a: 'Many foot and ankle conditions improve without surgery. We start with the simplest care that fits your exam and goals, and we talk about surgery only when it is likely to help.' },
-  { q: 'How soon should I be seen?', a: 'Book a visit if pain, swelling or changes in the foot last more than a few days, or keep you from normal activity. Get care right away for a severe injury, an open or quickly worsening wound, or spreading redness or fever.' },
-  { q: 'What should I bring to my visit?', a: 'Bring your insurance card, a list of your medicines, any past X-rays or reports, and the shoes you wear most often.' },
-];
+const area = regionImages[c.region];
+const own = slugsWithPhoto.includes(c.slug);
+const dir = `/images/conditions/${c.slug}`;
+const img = own
+  ? { hero: `${dir}/hero.jpg`, about: `${dir}/exam.jpg`, treat: `${dir}/therapy.jpg` }
+  : { hero: area.hero, about: area.about, treat: area.treat };
+const alt = (what: string) => `${c.title}: ${what}`;
 const related = conditions.filter((x) => x.region === c.region && x.slug !== c.slug).slice(0, 8);
 const svc = services.find((s) => s.slug === relatedService[c.slug]);
 const tel = `tel:${site.phone.replace(/-/g, '')}`;
-const blocks = [
-  { id: 'overview', label: 'Overview', text: c.overview },
-  { id: 'nonsurgical', label: 'Nonsurgical care', text: c.nonsurgical },
-  { id: 'surgical', label: 'Surgical care', text: c.surgical },
+const lower = c.title.charAt(0).toLowerCase() + c.title.slice(1);
+const sentences = (paras: string[]) => paras.flatMap((p) => p.split(/(?<=[.!?])\s+(?=[A-Z])/)).filter(Boolean);
+const care = sentences(c.nonsurgical);
+const surgery = sentences(c.surgical);
+const areas = 'Patients are welcome from across Scotch Plains, Jersey City, Union, Westfield, Plainfield, Elizabeth, Hoboken, Newark and the greater Union and Hudson County areas.';
+const visit = [
+  'We listen to where it hurts, when it started and what you want to get back to doing.',
+  'We examine your foot and ankle and how you walk, with imaging or tests only when they help.',
+  'We explain the likely cause and your choices in plain words, starting with care that does not need surgery.',
+  'You leave with clear next steps and an easy way to reach us if anything changes.',
+];
+const faqs = [
+  { q: `Will I need surgery for ${lower}?`, a: 'Many foot and ankle conditions improve without surgery. We start with the simplest care that fits your exam and goals, and we talk about surgery only when it is likely to help.' },
+  { q: 'How soon should I be seen?', a: 'Book a visit if pain, swelling or changes in the foot last more than a few days or keep you from normal activity. Get care right away for a severe injury, an open or quickly worsening wound, or spreading redness or fever.' },
+  { q: 'What should I bring to my visit?', a: 'Bring your insurance card, a list of your medicines, any past X-rays or reports, and the shoes you wear most often.' },
 ];
 ---
 <PageLayout
   title={c.title}
   eyebrow={c.region}
-  lede="What it is, and how we treat it with and without surgery."
+  lede="What it is, how we treat it, and when surgery may help."
   description={c.description}
   metaTitle={`${c.title} | Foot & Ankle Specialists of New Jersey`}
-  image={hero.img}
-  imageAlt={hero.alt}
-  position={hero.position}
-  crumbs={[{ label: 'Home', href: '/' }, { label: 'Conditions', href: '/conditions' }, { label: c.region }]}
+  image={img.hero}
+  imageAlt={alt('foot and ankle care in New Jersey')}
+  position="50% 50%"
+  areas={areas}
+  crumbs={[{ label: 'Home', href: '/' }, { label: 'Conditions', href: '/conditions' }, { label: c.title }]}
 >
-  <section class="aurora py-20 md:py-24">
-    <div class="mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-12 lg:gap-20">
-      <article class="lg:col-span-8">
-        {blocks.map((b, i) => (
-          <Reveal client:visible>
-            <section id={b.id} class:list={['scroll-mt-40', i > 0 && 'mt-14 border-t border-ink/10 pt-12']}>
-              <p class="eyebrow">{i === 0 ? 'About this condition' : i === 1 ? 'Care without surgery' : 'When surgery helps'}</p>
-              <h2 class="mt-3 font-serif text-4xl leading-[1.1] md:text-5xl">{b.label}</h2>
-              {b.text.map((p) => <p class="mt-5 max-w-3xl text-lg leading-[1.8] text-taupe-dark">{p}</p>)}
-            </section>
-          </Reveal>
-        ))}
-
-        <Reveal client:visible>
-          <section class="mt-14 border-t border-ink/10 pt-12">
-            <p class="eyebrow">Your visit</p>
-            <h2 class="mt-3 font-serif text-4xl leading-[1.1] md:text-5xl">What to expect</h2>
-            <ol class="mt-8 grid gap-5 sm:grid-cols-2">
-              {visit.map((v, n) => (
-                <li class="rounded-[1.25rem] border border-ink/10 bg-white p-6">
-                  <span class="flex h-10 w-10 items-center justify-center rounded-full border border-gold-deep/40 font-serif text-lg text-gold-deep">{n + 1}</span>
-                  <p class="mt-4 font-serif text-2xl">{v.t}</p>
-                  <p class="mt-2 text-taupe-dark">{v.d}</p>
-                </li>
-              ))}
-            </ol>
-          </section>
-        </Reveal>
-
-        <Reveal client:visible>
-          <section class="mt-14 border-t border-ink/10 pt-12">
-            <p class="eyebrow">Common questions</p>
-            <h2 class="mt-3 font-serif text-4xl leading-[1.1] md:text-5xl">Questions we hear</h2>
-            <div class="mt-8">
-              {faqs.map((f) => (
-                <details class="group border-b border-ink/10 py-5 first:border-t">
-                  <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-serif text-2xl">
-                    {f.q}
-                    <span class="text-gold-deep transition-transform duration-300 group-open:rotate-45" aria-hidden="true">+</span>
-                  </summary>
-                  <p class="mt-3 max-w-3xl text-lg leading-[1.8] text-taupe-dark">{f.a}</p>
-                </details>
-              ))}
-            </div>
-          </section>
-        </Reveal>
-
-        <div class="mt-14 rounded-[1.25rem] border border-taupe/50 bg-white p-7">
-          <h3 class="font-serif text-2xl">Get care promptly if you have</h3>
-          <p class="mt-3 leading-relaxed text-taupe-dark">A severe injury with deformity, an open or quickly worsening wound, spreading redness or fever, or a suddenly warm and swollen foot when feeling is reduced.</p>
-          <p class="mt-4 text-sm text-taupe-dark">Treatment is based on an exam and, when needed, imaging or other tests, and it may change with your health, circulation, sensation, activity and goals. This page is general education and is not a diagnosis.</p>
+  <!-- About -->
+  <section class="aurora py-24 md:py-28">
+    <div class="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-12 lg:gap-20">
+      <Reveal client:visible className="lg:col-span-7">
+        <p class="eyebrow">About the Condition</p>
+        <h2 class="text-balance mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">About {lower}</h2>
+        <div class="mt-6 space-y-5 text-lg leading-relaxed text-taupe-dark">
+          {c.overview.map((p) => <p>{p}</p>)}
         </div>
-      </article>
-
-      <aside class="lg:col-span-4">
-        <div class="lg:sticky lg:top-40">
-          <div class="rounded-[1.25rem] bg-ink p-7 text-white">
-            <p class="eyebrow !text-taupe">Need help?</p>
-            <h2 class="mt-3 font-serif text-3xl leading-tight">Talk to a foot and ankle specialist</h2>
-            <div class="mt-6 flex flex-col gap-3">
-              <a href={site.appointment} class="btn-appt"><span class="btn-fill"></span><span>Book Appointment</span></a>
-              <a href={tel} class="btn btn-light">Call {site.phone}</a>
-            </div>
-          </div>
-
-          {svc && (
-            <a href={`/services/${svc.slug}`} class="mt-6 block rounded-[1.25rem] border border-ink/10 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:border-taupe hover:shadow-xl hover:shadow-ink/10">
-              <p class="text-[11px] uppercase tracking-[0.22em] text-gold-deep">Related service</p>
-              <p class="mt-2 font-serif text-2xl">{svc.title}</p>
-              <p class="mt-2 text-sm text-taupe-dark">{svc.text}</p>
-            </a>
-          )}
-
-          <div class="mt-6 rounded-[1.25rem] border border-ink/10 bg-white p-6">
-            <p class="text-[11px] uppercase tracking-[0.22em] text-gold-deep">More in {c.region}</p>
-            <ul class="mt-3">
-              {related.map((r) => (
-                <li><a href={`/conditions/${r.slug}`} class="block border-b border-ink/10 py-2.5 font-serif text-lg leading-snug transition-colors last:border-0 hover:text-gold-deep">{r.title}</a></li>
-              ))}
-            </ul>
-            <a href="/conditions" class="mt-4 inline-block border-b border-taupe pb-1 text-xs uppercase tracking-[0.2em]">All conditions</a>
-          </div>
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a href={site.appointment} class="btn btn-dark btn-yellow">Book Appointment</a>
+          <a href={tel} class="btn btn-dark">Call {site.phone}</a>
         </div>
-      </aside>
+      </Reveal>
+      <Reveal client:visible delay={0.12} className="lg:col-span-5">
+        <div class="group overflow-hidden rounded-[1.5rem] border border-ink/10 shadow-2xl shadow-ink/10 transition duration-700 hover:-translate-y-2 hover:border-taupe">
+          <img src={img.about} alt={alt('a specialist examining the foot')} loading="lazy" class="aspect-square w-full object-cover transition duration-700 group-hover:scale-105" />
+        </div>
+      </Reveal>
     </div>
   </section>
-  <GetInTouch />
+
+  <!-- Care without surgery -->
+  <section class="bg-ink py-24 text-white md:py-28">
+    <div class="mx-auto max-w-7xl px-6">
+      <Reveal client:visible>
+        <div class="mx-auto max-w-2xl text-center">
+          <p class="eyebrow !text-taupe-light">Nonsurgical Care</p>
+          <h2 class="text-balance mt-4 font-serif text-4xl md:text-5xl">Care without surgery</h2>
+        </div>
+      </Reveal>
+      <div class:list={['mt-14 grid gap-6', care.length > 1 ? 'sm:grid-cols-2 lg:grid-cols-3' : 'mx-auto max-w-3xl']}>
+        {care.map((s, i) => (
+          <Reveal client:visible delay={(i % 3) * 0.08}>
+            <div class="h-full rounded-2xl border border-white/15 p-7 transition duration-500 hover:-translate-y-1.5 hover:border-taupe-light hover:bg-white/5">
+              <span class="font-serif text-3xl text-taupe-light">{String(i + 1).padStart(2, '0')}</span>
+              <p class="mt-3 text-[17px] leading-relaxed text-white/85">{s}</p>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Surgical care -->
+  <section class="bg-mist py-24 md:py-28">
+    <div class="mx-auto grid max-w-7xl items-start gap-14 px-6 lg:grid-cols-12 lg:gap-20">
+      <Reveal client:visible className="lg:col-span-5 lg:self-stretch">
+        <div class="group overflow-hidden rounded-[1.5rem] border border-ink/10 shadow-2xl shadow-ink/10 transition duration-700 hover:border-taupe lg:sticky lg:top-40">
+          <img src={img.treat} alt={alt('treatment at our office')} loading="lazy" class="aspect-square w-full object-cover transition duration-700 group-hover:scale-105" />
+        </div>
+      </Reveal>
+      <Reveal client:visible delay={0.12} className="lg:col-span-7">
+        <p class="eyebrow">Surgical Care</p>
+        <h2 class="text-balance mt-4 font-serif text-4xl leading-[1.1] md:text-5xl">When surgery may help</h2>
+        <ol class="mt-8 divide-y divide-ink/10 border-y border-ink/10">
+          {surgery.map((s, i) => (
+            <li class="group flex gap-5 py-7">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-gold-deep/40 font-serif text-lg text-gold-deep transition-colors duration-300 group-hover:bg-ink group-hover:text-taupe-light">{i + 1}</span>
+              <p class="text-lg leading-relaxed text-taupe-dark transition-colors group-hover:text-ink">{s}</p>
+            </li>
+          ))}
+        </ol>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- What to expect -->
+  <section class="aurora py-20">
+    <div class="mx-auto max-w-4xl px-6">
+      <Reveal client:visible>
+        <h2 class="text-balance text-center font-serif text-4xl md:text-5xl">What to expect at your visit</h2>
+        <ul class="mt-10 grid gap-4">
+          {visit.map((x) => (
+            <li class="flex items-center gap-4 rounded-xl border border-ink/10 bg-white px-6 py-4 transition duration-300 hover:-translate-y-0.5 hover:border-taupe hover:shadow-lg hover:shadow-ink/10">
+              <svg viewBox="0 0 24 24" class="h-5 w-5 shrink-0 text-gold-deep" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              <span class="text-taupe-dark">{x}</span>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- Questions -->
+  <section class="bg-mist py-24">
+    <div class="mx-auto max-w-4xl px-6">
+      <Reveal client:visible>
+        <h2 class="text-balance text-center font-serif text-4xl md:text-5xl">Questions we hear</h2>
+        <div class="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+          {faqs.map((f) => (
+            <details class="group py-5">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-6 font-serif text-2xl transition-colors hover:text-gold-deep">
+                {f.q}
+                <span class="text-gold-deep transition-transform duration-300 group-open:rotate-45" aria-hidden="true">+</span>
+              </summary>
+              <p class="mt-3 text-lg leading-relaxed text-taupe-dark">{f.a}</p>
+            </details>
+          ))}
+        </div>
+        <div class="mt-10 rounded-[1.25rem] border border-taupe/50 bg-white p-7">
+          <h3 class="font-serif text-2xl">Get care promptly if you have</h3>
+          <p class="mt-3 leading-relaxed text-taupe-dark">A severe injury with deformity, an open or quickly worsening wound, spreading redness or fever, or a suddenly warm and swollen foot when feeling is reduced.</p>
+          <p class="mt-4 text-sm text-taupe-dark">Treatment is based on an exam and, when needed, imaging or other tests, and it may change with your health, circulation, sensation, activity and goals. This page is general education, not a diagnosis.</p>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <!-- More in this area -->
+  <section class="aurora py-20">
+    <div class="mx-auto max-w-5xl px-6 text-center">
+      <Reveal client:visible>
+        <p class="eyebrow">{c.region}</p>
+        <h2 class="text-balance mt-4 font-serif text-4xl md:text-5xl">Related conditions</h2>
+        <div class="mt-10 flex flex-wrap justify-center gap-3">
+          {svc && <a href={`/services/${svc.slug}`} class="rounded-full border border-gold-deep bg-white px-5 py-3 text-sm font-medium text-gold-deep transition hover:bg-ink hover:text-white">Service: {svc.title}</a>}
+          {related.map((r) => <a href={`/conditions/${r.slug}`} class="rounded-full border border-ink/20 bg-white px-5 py-3 text-sm transition hover:border-ink hover:bg-ink hover:text-white">{r.title}</a>)}
+          <a href="/conditions" class="rounded-full border border-ink/20 px-5 py-3 text-sm uppercase tracking-[0.14em] transition hover:bg-ink hover:text-white">All conditions</a>
+        </div>
+      </Reveal>
+    </div>
+  </section>
+
+  <LocationCards title={`Get care for ${lower} near you`} text="Book a visit at the office closest to you. We have three New Jersey locations." />
+  <ServicesGrid />
+  <Insurance />
 </PageLayout>
