@@ -47,7 +47,8 @@ const pageTitle = city ? `${c.title} treatment in ${city.city}, NJ` : c.title;
 
 ---
 <PageLayout
-  title={pageTitle}
+  title={city ? `${c.title} treatment` : c.title}
+  titleAccent={city ? `in ${city.city}, NJ` : undefined}
   eyebrow={city ? `${city.city} Office` : c.region}
   lede={city ? `Care for ${lower} at our ${city.city} office, from first visit to getting back on your feet.` : 'What it is, how we treat it, and when surgery may help.'}
   description={city ? `${c.title} treatment in ${city.city}, NJ. Foot and ankle care at our ${city.city} office, starting with options that do not need surgery. Book a visit today.` : c.description}
