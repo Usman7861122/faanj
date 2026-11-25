@@ -1,3 +1,3 @@
 // Slugs of condition pages that have their own photos in /public/images/conditions/<slug>/ (hero.jpg, exam.jpg, therapy.jpg).
 // Pages not listed use the three area photos below.
-export const slugsWithPhoto: string[] = ["plantar-fasciitis-and-plantar-fasciosis", "bunions-and-juvenile-bunions", "ingrown-toenails", "achilles-tendinopathy", "achilles-tendon-tears-and-ruptures", "mortons-neuroma-and-interdigital-nerve", "hammertoe-mallet-toe-and-claw-toe"];
+export const slugsWithPhoto: string[] = ["plantar-fasciitis-and-plantar-fasciosis", "bunions-and-juvenile-bunions", "ingrown-toenails", "achilles-tendinopathy", "achilles-tendon-tears-and-ruptures", "mortons-neuroma-and-interdigital-nerve", "hammertoe-mallet-toe-and-claw-toe", "ankle-sprains-and-ligament-injuries", "chronic-ankle-instability", "flatfoot-or-cavus-deformity", "adult-acquired-flatfoot-and-progressive", "flexible-flatfoot-in-children-and-adolescents", "gout-and-inflammatory-arthritis"];
