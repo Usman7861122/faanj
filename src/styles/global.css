@@ -161,3 +161,6 @@
 .theme-logo .hero-copy { text-shadow: 0 1px 6px rgba(0,0,0,.6); }
 
 /* Header: whiter, slightly heavier text */
+
+.cond-tab.is-active{background:#ffcf40;color:#141414;border-radius:.5rem}
+.cond-tab:hover:not(.is-active){color:#fff}

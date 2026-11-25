@@ -41,29 +41,44 @@ const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] font-med
           </a>
 
           {n.children && (
-            <div class:list={[panel, condMega ? 'left-1/2 w-[min(68rem,calc(100vw-3rem))] -translate-x-1/2' : mega ? 'left-1/2 w-[min(56rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Our Practice' ? 'left-1/2 w-[min(44rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Providers' ? 'left-1/2 w-[min(46rem,calc(100vw-3rem))] -translate-x-1/2' : 'left-1/2 w-[26rem] -translate-x-1/2']}>
+            <div class:list={[panel, condMega ? 'left-1/2 w-[min(62rem,calc(100vw-3rem))] -translate-x-1/2' : mega ? 'left-1/2 w-[min(56rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Our Practice' ? 'left-1/2 w-[min(44rem,calc(100vw-3rem))] -translate-x-1/2' : n.label === 'Providers' ? 'left-1/2 w-[min(46rem,calc(100vw-3rem))] -translate-x-1/2' : 'left-1/2 w-[26rem] -translate-x-1/2']}>
               <div class="rounded-2xl border border-white/10 bg-ink-deep/95 p-5 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 {condMega && (
-                  <div class="p-1">
-                    <div class="flex items-end justify-between gap-6 border-b border-white/10 pb-4">
-                      <div>
-                        <p class="text-[10px] uppercase tracking-[0.28em] text-taupe">Conditions We Treat</p>
-                        <p class="mt-2 font-serif text-3xl leading-tight text-white">Find your condition</p>
-                      </div>
-                      <a href="/conditions" class="btn btn-light !min-h-11 !px-5 !text-[11px]">View all conditions</a>
+                  <div class="cond-mega grid grid-cols-[17rem_1fr] gap-8 p-1">
+                    <div class="flex flex-col border-r border-white/10 pr-6">
+                      <p class="text-[10px] uppercase tracking-[0.28em] text-taupe">Conditions We Treat</p>
+                      <p class="mt-2 font-serif text-3xl leading-tight text-white">Find your condition</p>
+                      <ul class="mt-5">
+                        {conditionRegions.map((r, i) => (
+                          <li>
+                            <a href="/conditions" data-cond-tab={i} class:list={['cond-tab group/tab flex items-center justify-between gap-3 border-b border-white/10 px-3 py-3.5 font-serif text-lg transition-colors', i === 0 ? 'is-active' : 'text-white/80']}>
+                              <span>{r}</span>
+                              <span class="flex items-center gap-2 text-[11px] font-sans tracking-wider text-white/45 group-[.is-active]/tab:text-ink"><span>{conditions.filter((c) => c.region === r).length}</span><span aria-hidden="true">→</span></span>
+                            </a>
+                          </li>
+                        ))}
+                      </ul>
+                      <a href="/conditions" class="btn btn-light mt-6 !min-h-11 !px-5 !text-[11px]">View all conditions</a>
                     </div>
-                    <div class="mt-5 grid grid-cols-3 gap-x-8 gap-y-6">
-                      {conditionRegions.map((r) => {
+                    <div class="min-h-[26rem]">
+                      {conditionRegions.map((r, i) => {
                         const list = conditions.filter((c) => c.region === r);
                         return (
-                          <div>
-                            <p class="font-serif text-xl text-taupe">{r}</p>
-                            <ul class="mt-2">
-                              {list.slice(0, 5).map((c) => (
-                                <li><a href={`/conditions/${c.slug}`} class="block truncate border-b border-white/10 py-2 text-[14px] text-white/80 transition-colors hover:text-white" title={c.title}>{c.title}</a></li>
+                          <div data-cond-panel={i} class:list={['cond-panel', i !== 0 && 'hidden']}>
+                            <div class="flex items-baseline justify-between border-b border-white/10 pb-3">
+                              <p class="font-serif text-2xl text-taupe">{r}</p>
+                              <p class="text-[11px] uppercase tracking-[0.18em] text-white/50">{list.length} conditions</p>
+                            </div>
+                            <ul class="mt-2 columns-2 gap-x-8">
+                              {list.map((c) => (
+                                <li class="break-inside-avoid">
+                                  <a href={`/conditions/${c.slug}`} class="group/row flex items-start gap-3 border-b border-white/10 py-2.5 text-[14px] leading-snug text-white/80 transition-colors hover:text-white">
+                                    <span class="flex-1">{c.title}</span>
+                                    <span class="-translate-x-2 text-taupe-light opacity-0 transition duration-300 group-hover/row:translate-x-0 group-hover/row:opacity-100">→</span>
+                                  </a>
+                                </li>
                               ))}
                             </ul>
-                            <a href="/conditions" class="mt-2 inline-block text-[11px] uppercase tracking-[0.18em] text-taupe-light hover:text-white">+ {Math.max(list.length - 5, 0)} more →</a>
                           </div>
                         );
                       })}
@@ -196,5 +211,23 @@ const link = 'whitespace-nowrap text-[12px] uppercase tracking-[0.16em] font-med
     on();
     window.addEventListener('scroll', on, { passive: true });
     document.addEventListener('astro:page-load', on);
+  })();
+</script>
+
+<script is:inline id="cond-mega-script">
+  (function () {
+    var root = document.querySelector('.cond-mega');
+    if (!root) return;
+    var tabs = root.querySelectorAll('[data-cond-tab]');
+    var panels = root.querySelectorAll('[data-cond-panel]');
+    function show(i) {
+      tabs.forEach(function (t) { var on = t.getAttribute('data-cond-tab') === String(i); t.classList.toggle('is-active', on); t.classList.toggle('text-white/80', !on); });
+      panels.forEach(function (p) { p.classList.toggle('hidden', p.getAttribute('data-cond-panel') !== String(i)); });
+    }
+    tabs.forEach(function (t) {
+      var i = t.getAttribute('data-cond-tab');
+      t.addEventListener('mouseenter', function () { show(i); });
+      t.addEventListener('focus', function () { show(i); });
+    });
   })();
 </script>
